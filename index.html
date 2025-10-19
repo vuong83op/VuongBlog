@@ -218,6 +218,23 @@
             isolation: isolate !important;
             contain: layout style paint !important;
         }
+
+        /* Avatar Placeholder Styling */
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 50%;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 0 20px rgba(188, 140, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
         
         /* Social Links Styling - Nằm ngang và chuyên nghiệp */
         .social-links {
@@ -898,7 +915,9 @@
                         </div>
                         <div class="hero-image">
                             <div class="profile-card">
-                                <div class="profile-avatar" id="profile-avatar">👨‍💻</div>
+                                <div class="profile-avatar" id="profile-avatar">
+                                    <div class="avatar-placeholder">👨‍💻</div>
+                                </div>
                                 <h3>Trần Văn Vương</h3>
                                 <p>Sinh viên CNTT HUTECH</p>
                                 <div class="profile-stats">
@@ -1197,7 +1216,7 @@
                         <div class="hero-content enhanced-hero-content">
                             <div class="hero-image enhanced-hero-image">
                                 <div class="profile-image enhanced-profile-image" id="about-profile-image">
-                                    <div class="profile-placeholder">👨‍💻</div>
+                                    <div class="avatar-placeholder">👨‍💻</div>
                                 </div>
                                 <div class="profile-decoration">
                                     <div class="decoration-ring ring-1"></div>
@@ -1671,9 +1690,10 @@
 
     <script src="script.js"></script>
     <script>
-        // Load avatar from localStorage
+        // Load avatar from localStorage with fallback
         function loadAvatar() {
             const avatar = localStorage.getItem('userAvatar');
+            
             if (avatar) {
                 const protectionStyle = `
                     width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
@@ -1689,6 +1709,17 @@
                 const aboutProfileImage = document.getElementById('about-profile-image');
                 if (aboutProfileImage) {
                     aboutProfileImage.innerHTML = `<img src="${avatar}" alt="Profile Image" style="${protectionStyle}">`;
+                }
+            } else {
+                // Show placeholder if no avatar
+                const profileAvatar = document.getElementById('profile-avatar');
+                if (profileAvatar && !profileAvatar.querySelector('img')) {
+                    profileAvatar.innerHTML = '<div class="avatar-placeholder">👨‍💻</div>';
+                }
+                
+                const aboutProfileImage = document.getElementById('about-profile-image');
+                if (aboutProfileImage && !aboutProfileImage.querySelector('img')) {
+                    aboutProfileImage.innerHTML = '<div class="avatar-placeholder">👨‍💻</div>';
                 }
             }
         }
