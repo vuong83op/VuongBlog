@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Blog Cá Nhân - Sinh viên CNTT HUTECH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -467,6 +467,7 @@
         .form-container {
             max-width: 600px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .enhanced-form {
@@ -557,6 +558,13 @@
         .form-actions {
             text-align: center;
             margin-top: 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .enhanced-btn {
@@ -819,7 +827,7 @@
             letter-spacing: 1px;
         }
 
-        /* Responsive Design */
+        /* Mobile Responsive Design */
         @media (max-width: 1024px) {
             .enhanced-hero-content {
                 grid-template-columns: 1fr;
@@ -839,33 +847,165 @@
         }
 
         @media (max-width: 768px) {
+            /* Mobile Form Fixes */
             .form-row {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
                 gap: 1rem;
             }
             
             .contact-form-section {
-                padding: 1.5rem;
+                padding: 1rem !important;
+                margin: 1rem 0;
+                border-radius: 12px;
+            }
+
+            .enhanced-input, .enhanced-textarea {
+                padding: 0.8rem 0.8rem 0.8rem 2.5rem !important;
+                font-size: 16px !important; /* Prevent zoom on iOS */
+            }
+
+            .input-icon {
+                left: 0.8rem !important;
+                font-size: 1rem !important;
+            }
+
+            .form-label {
+                left: 2.5rem !important;
+                font-size: 0.9rem !important;
+            }
+
+            .enhanced-btn {
+                width: 100% !important;
+                padding: 0.8rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
+
+            .button-group {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
+
+            .button-group .btn {
+                width: 100% !important;
+            }
+
+            /* Mobile About Section */
+            .enhanced-about-hero {
+                padding: 1.5rem 1rem !important;
                 margin: 1rem 0;
             }
 
-            .enhanced-about-hero {
-                padding: 2rem 1rem;
+            .enhanced-title {
+                font-size: 1.8rem !important;
+                line-height: 1.3;
             }
 
-            .enhanced-title {
-                font-size: 2rem;
+            .enhanced-subtitle {
+                font-size: 1.1rem !important;
+            }
+
+            .enhanced-description {
+                font-size: 1rem !important;
+                padding: 1rem !important;
             }
 
             .enhanced-stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
                 gap: 1rem;
             }
 
+            .enhanced-stat {
+                padding: 1rem !important;
+            }
+
             .enhanced-profile-image {
-                width: 200px;
-                height: 200px;
-                font-size: 3rem;
+                width: 180px !important;
+                height: 180px !important;
+                font-size: 2.5rem !important;
+            }
+
+            .ring-1 { width: 220px !important; height: 220px !important; }
+            .ring-2 { width: 260px !important; height: 260px !important; }
+            .ring-3 { width: 300px !important; height: 300px !important; }
+
+            /* Mobile Header */
+            .header-content {
+                flex-direction: column !important;
+                gap: 1rem;
+            }
+
+            .nav-list {
+                flex-direction: column !important;
+                gap: 0.5rem;
+            }
+
+            .header-search {
+                width: 100% !important;
+            }
+
+            .search-input {
+                width: 100% !important;
+            }
+
+            /* Mobile Cards */
+            .profile-card, .info-card, .skill-card, .project-card {
+                margin: 0.5rem 0 !important;
+                padding: 1rem !important;
+            }
+
+            /* Mobile Posts */
+            .posts-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem;
+            }
+
+            .post-card.horizontal {
+                flex-direction: column !important;
+            }
+
+            .post-card.horizontal .post-image {
+                width: 100% !important;
+                height: 200px !important;
+            }
+
+            /* Mobile Footer */
+            .footer-content {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra Small Mobile */
+            .container {
+                padding: 0.5rem !important;
+            }
+
+            .enhanced-title {
+                font-size: 1.5rem !important;
+            }
+
+            .enhanced-profile-image {
+                width: 150px !important;
+                height: 150px !important;
+                font-size: 2rem !important;
+            }
+
+            .ring-1 { width: 180px !important; height: 180px !important; }
+            .ring-2 { width: 220px !important; height: 220px !important; }
+            .ring-3 { width: 260px !important; height: 260px !important; }
+
+            .enhanced-input, .enhanced-textarea {
+                padding: 0.7rem 0.7rem 0.7rem 2rem !important;
+            }
+
+            .input-icon {
+                left: 0.7rem !important;
+            }
+
+            .form-label {
+                left: 2rem !important;
             }
         }
     </style>
