@@ -530,10 +530,14 @@
             <div class="content-subsection">
                 <h3 class="subsection-title">👤 Thông tin cá nhân</h3>
                 <div class="form-grid">
-                                    <div class="form-group">
+                    <div class="form-group">
+                        <label for="blog-title" class="form-label">Tên blog</label>
+                        <input type="text" id="blog-title" class="form-control" placeholder="Nhập tên blog">
+                    </div>
+                    <div class="form-group">
                         <label for="fullname" class="form-label">Họ và tên</label>
                         <input type="text" id="fullname" class="form-control" placeholder="Nhập họ và tên">
-                                    </div>
+                    </div>
                                     <div class="form-group">
                         <label for="birthday" class="form-label">Ngày sinh</label>
                         <input type="date" id="birthday" class="form-control">
@@ -555,7 +559,10 @@
                         <textarea id="address" class="form-control" rows="3" placeholder="Nhập địa chỉ"></textarea>
                                     </div>
                                     </div>
-                <button class="btn btn-primary" onclick="savePersonalInfo()">💾 Lưu thông tin</button>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="saveBlogTitle()">📝 Lưu tên blog</button>
+                    <button class="btn btn-primary" onclick="savePersonalInfo()">💾 Lưu thông tin</button>
+                </div>
                                     </div>
 
             <!-- Education Editor -->
@@ -943,6 +950,16 @@
             showSuccess('Thông tin cá nhân đã được lưu!');
         }
 
+        function saveBlogTitle() {
+            const blogTitle = document.getElementById('blog-title').value;
+            if (blogTitle.trim()) {
+                localStorage.setItem('blogTitle', blogTitle);
+                showSuccess('Tên blog đã được cập nhật!');
+            } else {
+                showError('Vui lòng nhập tên blog!');
+            }
+        }
+
         function saveEducationInfo() {
             const educationInfo = {
                 university: document.getElementById('university').value,
@@ -1093,6 +1110,10 @@
             if (personalInfo.email) document.getElementById('email').value = personalInfo.email;
             if (personalInfo.phone) document.getElementById('phone').value = personalInfo.phone;
             if (personalInfo.address) document.getElementById('address').value = personalInfo.address;
+            
+            // Load blog title
+            const blogTitle = localStorage.getItem('blogTitle');
+            if (blogTitle) document.getElementById('blog-title').value = blogTitle;
 
             // Load education info
             const educationInfo = JSON.parse(localStorage.getItem('educationInfo') || '{}');
