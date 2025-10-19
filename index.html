@@ -2280,37 +2280,74 @@
 
     <script src="script.js"></script>
     <script>
-        // Load avatar from localStorage with fallback
+        // Load avatar from file with fallback
         function loadAvatar() {
-            const avatar = localStorage.getItem('userAvatar');
+            const protectionStyle = `
+                width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+                filter: none !important; animation: none !important; transform: none !important;
+                isolation: isolate !important; contain: layout style paint !important;
+            `;
             
-            if (avatar) {
-                const protectionStyle = `
-                    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-                    filter: none !important; animation: none !important; transform: none !important;
-                    isolation: isolate !important; contain: layout style paint !important;
-                `;
+            // Try to load from localStorage first (for admin uploads)
+            const localStorageAvatar = localStorage.getItem('userAvatar');
+            let avatarSrc = localStorageAvatar;
+            
+            // If no localStorage avatar, try default image files
+            if (!avatarSrc) {
+                // List of possible image files to try
+                const possibleImages = [
+                    'anhchandung1.jpg',
+                    'profile.jpg', 
+                    'avatar.jpg',
+                    'profile.png',
+                    'avatar.png',
+                    'user.jpg',
+                    'user.png'
+                ];
                 
-                const profileAvatar = document.getElementById('profile-avatar');
-                if (profileAvatar) {
-                    profileAvatar.innerHTML = `<img src="${avatar}" alt="Profile Avatar" style="${protectionStyle}">`;
-                }
-                
-                const aboutProfileImage = document.getElementById('about-profile-image');
-                if (aboutProfileImage) {
-                    aboutProfileImage.innerHTML = `<img src="${avatar}" alt="Profile Image" style="${protectionStyle}">`;
+                // Try to find the first available image
+                for (let i = 0; i < possibleImages.length; i++) {
+                    const img = new Image();
+                    img.onload = function() {
+                        // Image exists, use it
+                        updateAvatarImages(possibleImages[i], protectionStyle);
+                    };
+                    img.onerror = function() {
+                        // Image doesn't exist, try next
+                        if (i === possibleImages.length - 1) {
+                            // No images found, show placeholder
+                            showPlaceholderAvatars();
+                        }
+                    };
+                    img.src = possibleImages[i];
                 }
             } else {
-                // Show placeholder if no avatar
-                const profileAvatar = document.getElementById('profile-avatar');
-                if (profileAvatar && !profileAvatar.querySelector('img')) {
-                    profileAvatar.innerHTML = '<div class="avatar-placeholder">👨‍💻</div>';
-                }
-                
-                const aboutProfileImage = document.getElementById('about-profile-image');
-                if (aboutProfileImage && !aboutProfileImage.querySelector('img')) {
-                    aboutProfileImage.innerHTML = '<div class="avatar-placeholder">👨‍💻</div>';
-                }
+                // Use localStorage avatar
+                updateAvatarImages(avatarSrc, protectionStyle);
+            }
+        }
+        
+        function updateAvatarImages(src, style) {
+            const profileAvatar = document.getElementById('profile-avatar');
+            if (profileAvatar) {
+                profileAvatar.innerHTML = `<img src="${src}" alt="Profile Avatar" style="${style}">`;
+            }
+            
+            const aboutProfileImage = document.getElementById('about-profile-image');
+            if (aboutProfileImage) {
+                aboutProfileImage.innerHTML = `<img src="${src}" alt="Profile Image" style="${style}">`;
+            }
+        }
+        
+        function showPlaceholderAvatars() {
+            const profileAvatar = document.getElementById('profile-avatar');
+            if (profileAvatar && !profileAvatar.querySelector('img')) {
+                profileAvatar.innerHTML = '<div class="avatar-placeholder">👨‍💻</div>';
+            }
+            
+            const aboutProfileImage = document.getElementById('about-profile-image');
+            if (aboutProfileImage && !aboutProfileImage.querySelector('img')) {
+                aboutProfileImage.innerHTML = '<div class="avatar-placeholder">👨‍💻</div>';
             }
         }
 
