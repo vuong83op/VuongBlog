@@ -1465,7 +1465,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="#home" class="logo">
-                    <span class="logo-text" id="logo-text">Blog HUTECH</span>
+                    <span class="logo-text" id="logo-text">Vuong Blog</span>
                 </a>
                 <nav class="nav">
                     <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
@@ -2360,17 +2360,8 @@
             loadSocialLinks();
             loadPosts();
             loadProjects();
-            loadBlogTitle();
         }
 
-        // Load blog title from localStorage
-        function loadBlogTitle() {
-            const blogTitle = localStorage.getItem('blogTitle');
-            const logoElement = document.getElementById('logo-text');
-            if (blogTitle && logoElement) {
-                logoElement.textContent = blogTitle;
-            }
-        }
 
         // Load personal info from localStorage
         function loadPersonalInfo() {
@@ -2629,8 +2620,6 @@
                 loadPosts();
             } else if (e.key === 'projects') {
                 loadProjects();
-            } else if (e.key === 'blogTitle') {
-                loadBlogTitle();
             }
         });
     </script>
