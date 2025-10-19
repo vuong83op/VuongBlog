@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Học C# từ cơ bản đến nâng cao - Phần 1 | Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Post Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .blog-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .blog-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'C#';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="blog-category">C# Programming</div>
+                <h1 class="blog-title">Học C# từ cơ bản đến nâng cao - Phần 1</h1>
+                <div class="blog-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 15/01/2024</span>
+                    <span>⏱️ 5 phút đọc</span>
+                    <span>👁️ 1,250 lượt xem</span>
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                <p>C# là một ngôn ngữ lập trình mạnh mẽ và phổ biến được phát triển bởi Microsoft. Trong bài viết này, tôi sẽ chia sẻ kinh nghiệm học C# từ những kiến thức cơ bản nhất, giúp các bạn sinh viên có thể bắt đầu hành trình lập trình một cách hiệu quả.</p>
+                
+                <h2>1. Giới thiệu về C#</h2>
+                <p>C# (C Sharp) là một ngôn ngữ lập trình hướng đối tượng, được thiết kế để xây dựng các ứng dụng trên nền tảng .NET. Với cú pháp rõ ràng và dễ hiểu, C# là lựa chọn tuyệt vời cho người mới bắt đầu.</p>
+                
+                <div class="highlight-box">
+                    <strong>💡 Lưu ý quan trọng:</strong> C# là ngôn ngữ type-safe, có nghĩa là bạn phải khai báo kiểu dữ liệu cho mọi biến, giúp tránh lỗi trong quá trình phát triển ứng dụng.
+                </div>
+                
+                <h2>2. Cài đặt môi trường phát triển</h2>
+                <p>Để bắt đầu học C#, bạn cần cài đặt:</p>
+                <ul>
+                    <li><strong>Visual Studio Community</strong> (miễn phí) - IDE chính thức của Microsoft</li>
+                    <li><strong>Visual Studio Code</strong> - Editor nhẹ với extension C#</li>
+                    <li><strong>.NET SDK</strong> - Framework runtime</li>
+                </ul>
+                
+                <h2>3. Cú pháp cơ bản</h2>
+                <p>Dưới đây là ví dụ về chương trình "Hello World" đầu tiên trong C#:</p>
+                
+                <div class="code-block">
+                    <pre><code>using System;
+
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Xin chào, đây là chương trình C# đầu tiên của bạn!");
+            Console.WriteLine("Nhấn phím bất kỳ để thoát...");
+            Console.ReadKey();
+        }
+    }
+}</code></pre>
+                </div>
+                
+                <h3>Giải thích code:</h3>
+                <ul>
+                    <li><code>using System;</code> - Import namespace System</li>
+                    <li><code>namespace</code> - Định nghĩa không gian tên</li>
+                    <li><code>class Program</code> - Định nghĩa class chính</li>
+                    <li><code>static void Main</code> - Điểm bắt đầu của chương trình</li>
+                </ul>
+                
+                <h2>4. Kiểu dữ liệu cơ bản</h2>
+                <p>C# có nhiều kiểu dữ liệu khác nhau:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Kiểu số nguyên
+int age = 25;
+long bigNumber = 123456789L;
+
+// Kiểu số thực
+double price = 99.99;
+float rate = 3.14f;
+decimal money = 1000.50m;
+
+// Kiểu ký tự và chuỗi
+char grade = 'A';
+string name = "Trần Văn Vương";
+
+// Kiểu boolean
+bool isStudent = true;
+
+// Kiểu DateTime
+DateTime today = DateTime.Now;</code></pre>
+                </div>
+                
+                <h2>5. Cấu trúc điều khiển</h2>
+                <h3>5.1. Câu lệnh if-else</h3>
+                <div class="code-block">
+                    <pre><code>int score = 85;
+
+if (score >= 90)
+{
+    Console.WriteLine("Xuất sắc!");
+}
+else if (score >= 80)
+{
+    Console.WriteLine("Giỏi!");
+}
+else if (score >= 70)
+{
+    Console.WriteLine("Khá!");
+}
+else
+{
+    Console.WriteLine("Cần cố gắng thêm!");
+}</code></pre>
+                </div>
+                
+                <h3>5.2. Vòng lặp for</h3>
+                <div class="code-block">
+                    <pre><code>// In ra các số từ 1 đến 10
+for (int i = 1; i <= 10; i++)
+{
+    Console.WriteLine($"Số thứ {i}");
+}</code></pre>
+                </div>
+                
+                <h2>6. Mảng và Collections</h2>
+                <p>Mảng là cấu trúc dữ liệu cơ bản để lưu trữ nhiều giá trị cùng kiểu:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Khai báo và khởi tạo mảng
+int[] numbers = {1, 2, 3, 4, 5};
+string[] students = new string[3];
+students[0] = "Nguyễn Văn A";
+students[1] = "Trần Thị B";
+students[2] = "Lê Văn C";
+
+// Duyệt mảng
+foreach (int number in numbers)
+{
+    Console.WriteLine(number);
+}</code></pre>
+                </div>
+                
+                <h2>7. Phương thức (Methods)</h2>
+                <p>Phương thức giúp tổ chức code thành các khối chức năng riêng biệt:</p>
+                
+                <div class="code-block">
+                    <pre><code>class Calculator
+{
+    // Phương thức tính tổng
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    // Phương thức tính giai thừa
+    public static int Factorial(int n)
+    {
+        if (n <= 1)
+            return 1;
+        return n * Factorial(n - 1);
+    }
+}
+
+// Sử dụng
+int result = Calculator.Add(5, 3);
+Console.WriteLine($"5 + 3 = {result}");
+
+int factorial = Calculator.Factorial(5);
+Console.WriteLine($"5! = {factorial}");</code></pre>
+                </div>
+                
+                <h2>8. Kết luận</h2>
+                <p>Trong phần 1 này, chúng ta đã tìm hiểu những kiến thức cơ bản nhất về C#. Đây là nền tảng quan trọng để bạn có thể tiếp tục học các khái niệm nâng cao hơn như OOP, LINQ, và async/await.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Bài tập thực hành:</strong>
+                    <ul>
+                        <li>Tạo chương trình tính điểm trung bình của sinh viên</li>
+                        <li>Viết chương trình kiểm tra số nguyên tố</li>
+                        <li>Xây dựng ứng dụng quản lý danh sách sinh viên đơn giản</li>
+                    </ul>
+                </div>
+                
+                <p>Trong phần tiếp theo, chúng ta sẽ tìm hiểu về Lập trình hướng đối tượng (OOP) trong C#. Hãy theo dõi blog để không bỏ lỡ những kiến thức bổ ích!</p>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

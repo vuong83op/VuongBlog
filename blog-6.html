@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Cuộc sống sinh viên CNTT - Cân bằng giữa học tập và giải trí | Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Post Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #6f42c1, #5a32a3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .blog-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .blog-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .student-life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .life-aspect {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .life-aspect h4 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid var(--neon-pink);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-pink);
+            border-radius: 50%;
+        }
+        
+        .tips-section {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .challenge {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .solution {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="blog-category">Cuộc sống sinh viên</div>
+                <h1 class="blog-title">Cuộc sống sinh viên CNTT - Cân bằng giữa học tập và giải trí</h1>
+                <div class="blog-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 25/12/2023</span>
+                    <span>⏱️ 4 phút đọc</span>
+                    <span>👁️ 3,200 lượt xem</span>
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                <p>Là sinh viên ngành Công nghệ Thông tin, cuộc sống của chúng ta luôn bận rộn với việc học lập trình, làm project, và cập nhật kiến thức mới. Trong bài viết này, tôi sẽ chia sẻ về cách cân bằng giữa việc học, làm project và thời gian giải trí.</p>
+                
+                <h2>1. Thách thức của sinh viên CNTT</h2>
+                <p>Ngành CNTT có những đặc thù riêng khiến cuộc sống sinh viên trở nên thú vị nhưng cũng đầy thách thức:</p>
+                
+                <div class="student-life-grid">
+                    <div class="life-aspect">
+                        <h4>📚 Học tập liên tục</h4>
+                        <ul>
+                            <li>Công nghệ thay đổi nhanh chóng</li>
+                            <li>Nhiều ngôn ngữ lập trình</li>
+                            <li>Framework mới liên tục</li>
+                            <li>Kiến thức cần cập nhật thường xuyên</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="life-aspect">
+                        <h4>💻 Project thực tế</h4>
+                        <ul>
+                            <li>Deadline nghiêm ngặt</li>
+                            <li>Code quality cao</li>
+                            <li>Làm việc nhóm</li>
+                            <li>Debug và fix bugs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="life-aspect">
+                        <h4>⚖️ Cân bằng cuộc sống</h4>
+                        <ul>
+                            <li>Thời gian học vs giải trí</li>
+                            <li>Sức khỏe tinh thần</li>
+                            <li>Mối quan hệ xã hội</li>
+                            <li>Hoạt động ngoại khóa</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>2. Lịch trình hàng ngày của tôi</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>🌅 Buổi sáng (6:00 - 8:00)</h3>
+                        <p>Thức dậy sớm, tập thể dục nhẹ, ăn sáng và chuẩn bị cho ngày mới. Đây là thời gian tôi thường đọc tin tức công nghệ và lập kế hoạch cho ngày.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>📖 Giờ học (8:00 - 12:00)</h3>
+                        <p>Tham gia các lớp học chính thức tại trường. Tập trung cao độ để nắm bắt kiến thức mới và tương tác với giảng viên.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>🍽️ Nghỉ trưa (12:00 - 13:30)</h3>
+                        <p>Thời gian nghỉ ngơi, ăn trưa cùng bạn bè và thư giãn. Đôi khi tôi dành thời gian này để xem video YouTube về công nghệ.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>💻 Làm project (13:30 - 17:00)</h3>
+                        <p>Thời gian tập trung làm project cá nhân hoặc nhóm. Đây là lúc tôi thực hành những kiến thức đã học và phát triển kỹ năng lập trình.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>🎮 Giải trí (17:00 - 19:00)</h3>
+                        <p>Chơi game, xem phim, hoặc gặp gỡ bạn bè. Đây là thời gian quan trọng để thư giãn và tái tạo năng lượng.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>📚 Học buổi tối (19:00 - 22:00)</h3>
+                        <p>Ôn tập bài học, đọc tài liệu mới, hoặc học thêm kỹ năng bổ sung. Đây là thời gian tôi thường học online và tham gia các khóa học trực tuyến.</p>
+                    </div>
+                </div>
+                
+                <h2>3. Cách cân bằng học tập và giải trí</h2>
+                <div class="challenge-solution">
+                    <div class="challenge">
+                        <h4>⚠️ Thách thức</h4>
+                        <ul>
+                            <li>Áp lực học tập cao</li>
+                            <li>Deadline dồn dập</li>
+                            <li>Kiến thức cần cập nhật liên tục</li>
+                            <li>Thời gian hạn chế</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution">
+                        <h4>✅ Giải pháp</h4>
+                        <ul>
+                            <li>Lập kế hoạch chi tiết</li>
+                            <li>Ưu tiên công việc quan trọng</li>
+                            <li>Học cách nói "không"</li>
+                            <li>Dành thời gian cho bản thân</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>4. Tips quản lý thời gian hiệu quả</h2>
+                <div class="tips-section">
+                    <h3>⏰ Phương pháp Pomodoro</h3>
+                    <p>Chia thời gian học thành các khối 25 phút, nghỉ 5 phút giữa các khối. Sau 4 khối, nghỉ dài 15-30 phút.</p>
+                    
+                    <h3>📝 To-do List hàng ngày</h3>
+                    <p>Viết ra 3-5 việc quan trọng nhất cần làm trong ngày. Tập trung hoàn thành những việc này trước.</p>
+                    
+                    <h3>🎯 Mục tiêu SMART</h3>
+                    <p>Đặt mục tiêu cụ thể, đo lường được, có thể đạt được, liên quan và có thời hạn.</p>
+                </div>
+                
+                <h2>5. Hoạt động giải trí bổ ích</h2>
+                <div class="highlight-box">
+                    <strong>🎮 Giải trí có ích cho sinh viên CNTT:</strong>
+                    <ul>
+                        <li><strong>Gaming:</strong> Chơi game giúp rèn luyện tư duy logic và phản xạ</li>
+                        <li><strong>Podcast công nghệ:</strong> Nghe podcast trong lúc đi bộ hoặc tập thể dục</li>
+                        <li><strong>Meetup và workshop:</strong> Tham gia các sự kiện công nghệ</li>
+                        <li><strong>Open source:</strong> Đóng góp cho các dự án mã nguồn mở</li>
+                        <li><strong>Blogging:</strong> Viết blog chia sẻ kiến thức</li>
+                    </ul>
+                </div>
+                
+                <h2>6. Chăm sóc sức khỏe</h2>
+                <h3>6.1. Sức khỏe thể chất</h3>
+                <ul>
+                    <li><strong>Tập thể dục thường xuyên:</strong> Ít nhất 30 phút/ngày</li>
+                    <li><strong>Ăn uống lành mạnh:</strong> Tránh thức khuya và ăn uống không đều</li>
+                    <li><strong>Nghỉ ngơi đủ:</strong> Ngủ 7-8 tiếng/ngày</li>
+                    <li><strong>Bảo vệ mắt:</strong> Sử dụng kính chống ánh sáng xanh</li>
+                </ul>
+                
+                <h3>6.2. Sức khỏe tinh thần</h3>
+                <ul>
+                    <li><strong>Thiền định:</strong> 10-15 phút/ngày để giảm stress</li>
+                    <li><strong>Giao tiếp xã hội:</strong> Duy trì mối quan hệ với bạn bè</li>
+                    <li><strong>Sở thích cá nhân:</strong> Dành thời gian cho những gì mình yêu thích</li>
+                    <li><strong>Học hỏi liên tục:</strong> Nhưng không quá áp lực</li>
+                </ul>
+                
+                <h2>7. Xây dựng network và mối quan hệ</h2>
+                <div class="student-life-grid">
+                    <div class="life-aspect">
+                        <h4>👥 Bạn cùng lớp</h4>
+                        <p>Học nhóm, chia sẻ tài liệu, hỗ trợ lẫn nhau trong học tập và làm project.</p>
+                    </div>
+                    
+                    <div class="life-aspect">
+                        <h4>👨‍🏫 Giảng viên</h4>
+                        <p>Xây dựng mối quan hệ tốt với thầy cô để nhận được sự hướng dẫn và cơ hội thực tập.</p>
+                    </div>
+                    
+                    <div class="life-aspect">
+                        <h4>🌐 Cộng đồng online</h4>
+                        <p>Tham gia các group Facebook, Discord, Reddit về lập trình để học hỏi và chia sẻ kinh nghiệm.</p>
+                    </div>
+                </div>
+                
+                <h2>8. Chuẩn bị cho tương lai</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>📚 Năm 1-2: Xây dựng nền tảng</h3>
+                        <p>Tập trung học các môn cơ bản, làm quen với lập trình, xây dựng portfolio cá nhân.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>💼 Năm 3: Thực tập và kinh nghiệm</h3>
+                        <p>Tìm kiếm cơ hội thực tập, tham gia các dự án thực tế, phát triển kỹ năng chuyên môn.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>🚀 Năm 4: Định hướng nghề nghiệp</h3>
+                        <p>Chuẩn bị tốt nghiệp, tìm kiếm việc làm, hoặc tiếp tục học lên cao.</p>
+                    </div>
+                </div>
+                
+                <h2>9. Lời khuyên cho sinh viên mới</h2>
+                <div class="highlight-box">
+                    <strong>💡 Những điều tôi ước mình biết sớm hơn:</strong>
+                    <ul>
+                        <li><strong>Đừng so sánh với người khác:</strong> Mỗi người có tốc độ học khác nhau</li>
+                        <li><strong>Học từ lỗi sai:</strong> Bug và error là bạn, không phải kẻ thù</li>
+                        <li><strong>Thực hành nhiều:</strong> Code mỗi ngày, dù chỉ 30 phút</li>
+                        <li><strong>Đọc code của người khác:</strong> Học từ GitHub, Stack Overflow</li>
+                        <li><strong>Viết blog:</strong> Chia sẻ kiến thức giúp bạn hiểu sâu hơn</li>
+                        <li><strong>Tham gia cộng đồng:</strong> Học hỏi từ những người có kinh nghiệm</li>
+                    </ul>
+                </div>
+                
+                <h2>10. Kết luận</h2>
+                <p>Cuộc sống sinh viên CNTT có thể bận rộn và đầy thách thức, nhưng cũng rất thú vị và bổ ích. Quan trọng nhất là tìm được sự cân bằng giữa học tập, làm việc và giải trí. Hãy nhớ rằng, không chỉ học để có việc làm, mà còn học để trở thành một con người toàn diện.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Thông điệp cuối cùng:</strong>
+                    <p>Hãy tận hưởng từng ngày của cuộc sống sinh viên. Đây là thời gian tuyệt vời để khám phá, học hỏi và phát triển bản thân. Đừng quá áp lực về việc phải biết tất cả mọi thứ, mà hãy tập trung vào việc học cách học và xây dựng nền tảng vững chắc cho tương lai.</p>
+                </div>
+                
+                <p>Nếu bạn có câu hỏi về cuộc sống sinh viên hoặc muốn chia sẻ kinh nghiệm của mình, hãy để lại comment bên dưới nhé! Chúng ta có thể học hỏi lẫn nhau và cùng nhau phát triển.</p>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

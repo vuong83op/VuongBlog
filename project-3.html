@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Ứng dụng quản lý sinh viên | Dự án tiêu biểu - Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Project Page Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .project-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .project-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .project-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .project-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .feature-card h4 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .architecture-diagram {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .challenge {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .solution {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .workflow-diagram {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="project-page">
+            <header class="project-header">
+                <div class="project-category">Desktop Application</div>
+                <h1 class="project-title">Ứng dụng quản lý sinh viên</h1>
+                <p class="project-subtitle">Desktop application quản lý thông tin sinh viên</p>
+                <div class="project-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 2023</span>
+                    <span>⏱️ 2 tháng phát triển</span>
+                    <span>🔧 Desktop App</span>
+                </div>
+            </header>
+            
+            <div class="project-content">
+                <h2>🎓 Tổng quan dự án</h2>
+                <p>Ứng dụng quản lý sinh viên là một desktop application được phát triển bằng C# WinForms để quản lý thông tin sinh viên trong trường học. Dự án này giúp tôi nắm vững việc phát triển ứng dụng desktop và làm việc với cơ sở dữ liệu.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Mục tiêu dự án:</strong>
+                    <ul>
+                        <li>Quản lý thông tin sinh viên</li>
+                        <li>Theo dõi điểm số và học tập</li>
+                        <li>Quản lý lớp học và môn học</li>
+                        <li>Báo cáo thống kê</li>
+                    </ul>
+                </div>
+                
+                <h2>🛠️ Công nghệ sử dụng</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">WinForms</span>
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">Entity Framework</span>
+                    <span class="tech-tag">LINQ</span>
+                    <span class="tech-tag">Crystal Reports</span>
+                    <span class="tech-tag">ADO.NET</span>
+                    <span class="tech-tag">Git</span>
+                </div>
+                
+                <h2>✨ Tính năng chính</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>👥 Quản lý sinh viên</h4>
+                        <ul>
+                            <li>Thêm, sửa, xóa thông tin sinh viên</li>
+                            <li>Upload và quản lý ảnh đại diện</li>
+                            <li>Tìm kiếm sinh viên theo nhiều tiêu chí</li>
+                            <li>Xuất danh sách sinh viên</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📚 Quản lý lớp học</h4>
+                        <ul>
+                            <li>Tạo và quản lý lớp học</li>
+                            <li>Phân công sinh viên vào lớp</li>
+                            <li>Theo dõi sĩ số lớp</li>
+                            <li>Quản lý giáo viên chủ nhiệm</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📊 Quản lý điểm số</h4>
+                        <ul>
+                            <li>Nhập điểm các môn học</li>
+                            <li>Tính điểm trung bình tự động</li>
+                            <li>Xếp loại học lực</li>
+                            <li>Lịch sử điểm theo kỳ</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📈 Báo cáo thống kê</h4>
+                        <ul>
+                            <li>Thống kê điểm số theo lớp</li>
+                            <li>Báo cáo học lực sinh viên</li>
+                            <li>Xuất báo cáo PDF/Excel</li>
+                            <li>Biểu đồ trực quan</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>🏗️ Kiến trúc hệ thống</h2>
+                <div class="architecture-diagram">
+                    <h3>📐 Mô hình 3-tier Architecture</h3>
+                    <p><strong>Presentation Layer (WinForms):</strong> Giao diện người dùng</p>
+                    <p><strong>Business Logic Layer:</strong> Xử lý logic nghiệp vụ</p>
+                    <p><strong>Data Access Layer:</strong> Truy cập cơ sở dữ liệu</p>
+                    <p><strong>Database (SQL Server):</strong> Lưu trữ dữ liệu</p>
+                </div>
+                
+                <h2>🗄️ Thiết kế cơ sở dữ liệu</h2>
+                <p>Hệ thống sử dụng SQL Server với các bảng chính:</p>
+                <ul>
+                    <li><strong>Students:</strong> Thông tin sinh viên</li>
+                    <li><strong>Classes:</strong> Thông tin lớp học</li>
+                    <li><strong>Subjects:</strong> Danh mục môn học</li>
+                    <li><strong>Grades:</strong> Điểm số sinh viên</li>
+                    <li><strong>Teachers:</strong> Thông tin giáo viên</li>
+                    <li><strong>Users:</strong> Tài khoản hệ thống</li>
+                </ul>
+                
+                <h2>🔄 Quy trình nghiệp vụ</h2>
+                <div class="workflow-diagram">
+                    <h4>📋 Workflow chính</h4>
+                    <ol>
+                        <li><strong>Đăng nhập:</strong> Xác thực người dùng</li>
+                        <li><strong>Quản lý sinh viên:</strong> CRUD operations</li>
+                        <li><strong>Phân lớp:</strong> Gán sinh viên vào lớp</li>
+                        <li><strong>Nhập điểm:</strong> Cập nhật điểm số</li>
+                        <li><strong>Báo cáo:</strong> Xuất thống kê</li>
+                    </ol>
+                </div>
+                
+                <h2>💡 Thách thức và giải pháp</h2>
+                <div class="challenge-solution">
+                    <div class="challenge">
+                        <h4>⚠️ Thách thức</h4>
+                        <ul>
+                            <li>UI/UX cho desktop app</li>
+                            <li>Performance với dữ liệu lớn</li>
+                            <li>Data validation</li>
+                            <li>Report generation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution">
+                        <h4>✅ Giải pháp</h4>
+                        <ul>
+                            <li>Modern WinForms design</li>
+                            <li>Pagination và lazy loading</li>
+                            <li>Input validation rules</li>
+                            <li>Crystal Reports integration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>🔐 Bảo mật và phân quyền</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>👤 Phân quyền người dùng</h4>
+                        <ul>
+                            <li>Admin: Toàn quyền hệ thống</li>
+                            <li>Teacher: Quản lý lớp và điểm</li>
+                            <li>Student: Xem thông tin cá nhân</li>
+                            <li>Guest: Chỉ xem công khai</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🛡️ Bảo mật dữ liệu</h4>
+                        <ul>
+                            <li>Password encryption</li>
+                            <li>Session management</li>
+                            <li>Data backup</li>
+                            <li>Audit logging</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>📈 Kết quả đạt được</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🎓 Kỹ năng kỹ thuật</h4>
+                        <ul>
+                            <li>Thành thạo C# WinForms</li>
+                            <li>Entity Framework ORM</li>
+                            <li>SQL Server database</li>
+                            <li>Report generation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🚀 Kỹ năng mềm</h4>
+                        <ul>
+                            <li>Desktop app development</li>
+                            <li>Database design</li>
+                            <li>User experience design</li>
+                            <li>Project documentation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>🔧 Cài đặt và chạy dự án</h2>
+                <div class="highlight-box">
+                    <strong>📋 Hướng dẫn cài đặt:</strong>
+                    <ol>
+                        <li>Clone repository từ GitHub</li>
+                        <li>Cài đặt Visual Studio</li>
+                        <li>Cấu hình SQL Server connection</li>
+                        <li>Restore database từ backup</li>
+                        <li>Build và chạy ứng dụng</li>
+                    </ol>
+                </div>
+                
+                <h2>📚 Bài học kinh nghiệm</h2>
+                <p>Dự án này đã mang lại nhiều kinh nghiệm quý báu:</p>
+                <ul>
+                    <li><strong>Desktop development:</strong> Hiểu rõ về phát triển ứng dụng desktop</li>
+                    <li><strong>Database design:</strong> Thiết kế cơ sở dữ liệu hiệu quả</li>
+                    <li><strong>ORM usage:</strong> Sử dụng Entity Framework</li>
+                    <li><strong>Report generation:</strong> Tạo báo cáo với Crystal Reports</li>
+                    <li><strong>User interface:</strong> Thiết kế giao diện thân thiện</li>
+                </ul>
+                
+                <h2>🔮 Hướng phát triển</h2>
+                <p>Trong tương lai, tôi dự định nâng cấp dự án với:</p>
+                <ul>
+                    <li>Web version với ASP.NET Core</li>
+                    <li>Mobile app companion</li>
+                    <li>Advanced analytics</li>
+                    <li>Cloud deployment</li>
+                    <li>API integration</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Kết luận:</strong>
+                    <p>Dự án Ứng dụng quản lý sinh viên đã giúp tôi nắm vững việc phát triển ứng dụng desktop và làm việc với cơ sở dữ liệu. Đây là nền tảng quan trọng cho việc phát triển các ứng dụng phức tạp hơn trong tương lai.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

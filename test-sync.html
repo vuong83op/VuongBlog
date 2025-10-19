@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Data Sync</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin: 10px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #007bff; }
+        .success { border-left-color: #28a745; background: #d4edda; }
+        .error { border-left-color: #dc3545; background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>Test Data Sync Between Admin and Homepage</h1>
+    
+    <div class="test-section">
+        <h3>1. Kiểm tra dữ liệu trong localStorage</h3>
+        <button onclick="checkLocalStorage()">Kiểm tra localStorage</button>
+        <div id="localStorageResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>2. Tạo dữ liệu test</h3>
+        <button onclick="createTestData()">Tạo dữ liệu test</button>
+        <div id="testDataResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>3. Mở trang chủ</h3>
+        <button onclick="openHomepage()">Mở trang chủ</button>
+        <div id="homepageResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>4. Mở Admin</h3>
+        <button onclick="openAdmin()">Mở Admin</button>
+        <div id="adminResult" class="result"></div>
+    </div>
+
+    <script>
+        function checkLocalStorage() {
+            const result = document.getElementById('localStorageResult');
+            try {
+                const data = localStorage.getItem('blogData');
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    result.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Dữ liệu có trong localStorage:</h4>
+                            <pre>${JSON.stringify(parsed, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Không có dữ liệu trong localStorage</h4>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Lỗi đọc localStorage: ${error.message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function createTestData() {
+            const result = document.getElementById('testDataResult');
+            try {
+                const testData = {
+                    posts: [
+                        {
+                            id: 999,
+                            title: "Test Bài Viết từ Test Page",
+                            category: "Test Category",
+                            status: "published",
+                            views: 100,
+                            date: new Date().toLocaleDateString('vi-VN'),
+                            excerpt: "Đây là bài viết test được tạo từ test page",
+                            content: "Nội dung chi tiết của bài viết test..."
+                        }
+                    ],
+                    projects: [
+                        {
+                            id: 999,
+                            name: "Test Dự Án từ Test Page",
+                            description: "Đây là dự án test được tạo từ test page",
+                            technologies: "Test Tech",
+                            status: "completed",
+                            link: "test-project.html"
+                        }
+                    ],
+                    lastUpdated: new Date().toISOString()
+                };
+
+                localStorage.setItem('blogData', JSON.stringify(testData));
+                
+                result.innerHTML = `
+                    <div class="success">
+                        <h4>✅ Đã tạo dữ liệu test thành công!</h4>
+                        <p>Dữ liệu đã được lưu vào localStorage</p>
+                    </div>
+                `;
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Lỗi tạo dữ liệu test: ${error.message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function openHomepage() {
+            const result = document.getElementById('homepageResult');
+            try {
+                const newWindow = window.open('index.html', '_blank');
+                if (newWindow) {
+                    result.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Đã mở trang chủ</h4>
+                            <p>Kiểm tra xem dữ liệu có được load không</p>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Không thể mở trang chủ (có thể bị chặn popup)</h4>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Lỗi mở trang chủ: ${error.message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        function openAdmin() {
+            const result = document.getElementById('adminResult');
+            try {
+                const newWindow = window.open('admin.html', '_blank');
+                if (newWindow) {
+                    result.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Đã mở Admin</h4>
+                            <p>Thử thêm/sửa dữ liệu và click "Sync với trang chủ"</p>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Không thể mở Admin (có thể bị chặn popup)</h4>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Lỗi mở Admin: ${error.message}</h4>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto check localStorage on page load
+        window.addEventListener('load', function() {
+            setTimeout(checkLocalStorage, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Thuật toán sắp xếp nhanh (Quick Sort) | Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Post Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .blog-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .blog-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'C#';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .algorithm-steps {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .complexity-table th,
+        .complexity-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .complexity-table th {
+            background: var(--neon-purple);
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="blog-category">Thuật toán</div>
+                <h1 class="blog-title">Thuật toán sắp xếp nhanh (Quick Sort)</h1>
+                <div class="blog-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 10/01/2024</span>
+                    <span>⏱️ 8 phút đọc</span>
+                    <span>👁️ 980 lượt xem</span>
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                <p>Quick Sort là một trong những thuật toán sắp xếp hiệu quả nhất với độ phức tạp trung bình O(n log n). Trong bài viết này, tôi sẽ giải thích chi tiết cách hoạt động và cách implement Quick Sort trong C#.</p>
+                
+                <h2>1. Giới thiệu về Quick Sort</h2>
+                <p>Quick Sort là thuật toán sắp xếp dựa trên phương pháp "Chia để trị" (Divide and Conquer). Thuật toán hoạt động bằng cách chọn một phần tử làm "pivot" và chia mảng thành hai phần: phần tử nhỏ hơn pivot và phần tử lớn hơn pivot.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Ưu điểm của Quick Sort:</strong>
+                    <ul>
+                        <li>Độ phức tạp trung bình: O(n log n)</li>
+                        <li>Sắp xếp tại chỗ (in-place)</li>
+                        <li>Hiệu quả với dữ liệu lớn</li>
+                        <li>Dễ implement và hiểu</li>
+                    </ul>
+                </div>
+                
+                <h2>2. Cách hoạt động của Quick Sort</h2>
+                <div class="algorithm-steps">
+                    <h3>📋 Các bước thực hiện:</h3>
+                    <ol>
+                        <li><strong>Chọn pivot:</strong> Chọn một phần tử làm pivot (thường là phần tử đầu, cuối, hoặc giữa)</li>
+                        <li><strong>Phân hoạch:</strong> Sắp xếp lại mảng sao cho tất cả phần tử nhỏ hơn pivot nằm bên trái, lớn hơn pivot nằm bên phải</li>
+                        <li><strong>Đệ quy:</strong> Áp dụng Quick Sort cho hai mảng con bên trái và bên phải pivot</li>
+                        <li><strong>Kết hợp:</strong> Khi các mảng con đã được sắp xếp, toàn bộ mảng sẽ được sắp xếp</li>
+                    </ol>
+                </div>
+                
+                <h2>3. Implementation trong C#</h2>
+                <p>Dưới đây là code C# hoàn chỉnh cho thuật toán Quick Sort:</p>
+                
+                <div class="code-block">
+                    <pre><code>public class QuickSort
+{
+    public static void Sort(int[] arr)
+    {
+        if (arr == null || arr.Length <= 1)
+            return;
+            
+        QuickSortRecursive(arr, 0, arr.Length - 1);
+    }
+    
+    private static void QuickSortRecursive(int[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+            // Tìm pivot và phân hoạch mảng
+            int pivotIndex = Partition(arr, low, high);
+            
+            // Đệ quy sắp xếp hai mảng con
+            QuickSortRecursive(arr, low, pivotIndex - 1);
+            QuickSortRecursive(arr, pivotIndex + 1, high);
+        }
+    }
+    
+    private static int Partition(int[] arr, int low, int high)
+    {
+        // Chọn pivot là phần tử cuối
+        int pivot = arr[high];
+        int i = low - 1; // Chỉ số của phần tử nhỏ hơn
+        
+        for (int j = low; j < high; j++)
+        {
+            // Nếu phần tử hiện tại nhỏ hơn hoặc bằng pivot
+            if (arr[j] <= pivot)
+            {
+                i++;
+                Swap(arr, i, j);
+            }
+        }
+        
+        // Đặt pivot vào vị trí đúng
+        Swap(arr, i + 1, high);
+        return i + 1;
+    }
+    
+    private static void Swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}</code></pre>
+                </div>
+                
+                <h2>4. Ví dụ minh họa</h2>
+                <p>Hãy xem cách Quick Sort hoạt động với mảng [64, 34, 25, 12, 22, 11, 90]:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Mảng ban đầu: [64, 34, 25, 12, 22, 11, 90]
+// Chọn pivot = 90 (phần tử cuối)
+
+// Bước 1: Phân hoạch
+// So sánh từng phần tử với pivot (90)
+// 64 <= 90 ✓, 34 <= 90 ✓, 25 <= 90 ✓, 12 <= 90 ✓, 22 <= 90 ✓, 11 <= 90 ✓
+// Kết quả: [64, 34, 25, 12, 22, 11, 90] (pivot ở vị trí cuối)
+
+// Bước 2: Đệ quy với mảng con trái [64, 34, 25, 12, 22, 11]
+// Chọn pivot = 11
+// Kết quả: [11, 34, 25, 12, 22, 64]
+
+// Tiếp tục quá trình cho đến khi mảng được sắp xếp hoàn toàn</code></pre>
+                </div>
+                
+                <h2>5. Độ phức tạp thuật toán</h2>
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>Trường hợp</th>
+                            <th>Độ phức tạp thời gian</th>
+                            <th>Độ phức tạp không gian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tốt nhất (Best Case)</td>
+                            <td>O(n log n)</td>
+                            <td>O(log n)</td>
+                        </tr>
+                        <tr>
+                            <td>Trung bình (Average Case)</td>
+                            <td>O(n log n)</td>
+                            <td>O(log n)</td>
+                        </tr>
+                        <tr>
+                            <td>Tệ nhất (Worst Case)</td>
+                            <td>O(n²)</td>
+                            <td>O(n)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>6. Cải tiến thuật toán</h2>
+                <h3>6.1. Randomized Quick Sort</h3>
+                <p>Để tránh trường hợp tệ nhất, ta có thể chọn pivot ngẫu nhiên:</p>
+                
+                <div class="code-block">
+                    <pre><code>private static int RandomizedPartition(int[] arr, int low, int high)
+{
+    Random random = new Random();
+    int randomIndex = random.Next(low, high + 1);
+    Swap(arr, randomIndex, high);
+    return Partition(arr, low, high);
+}</code></pre>
+                </div>
+                
+                <h3>6.2. 3-Way Quick Sort</h3>
+                <p>Xử lý trường hợp có nhiều phần tử trùng lặp:</p>
+                
+                <div class="code-block">
+                    <pre><code>public static void ThreeWayQuickSort(int[] arr, int low, int high)
+{
+    if (low >= high) return;
+    
+    int lt = low, i = low, gt = high;
+    int pivot = arr[low];
+    
+    while (i <= gt)
+    {
+        if (arr[i] < pivot)
+        {
+            Swap(arr, lt++, i++);
+        }
+        else if (arr[i] > pivot)
+        {
+            Swap(arr, i, gt--);
+        }
+        else
+        {
+            i++;
+        }
+    }
+    
+    ThreeWayQuickSort(arr, low, lt - 1);
+    ThreeWayQuickSort(arr, gt + 1, high);
+}</code></pre>
+                </div>
+                
+                <h2>7. So sánh với các thuật toán khác</h2>
+                <div class="highlight-box">
+                    <strong>📊 Bảng so sánh:</strong>
+                    <ul>
+                        <li><strong>Merge Sort:</strong> Ổn định hơn nhưng cần thêm không gian O(n)</li>
+                        <li><strong>Heap Sort:</strong> Độ phức tạp ổn định O(n log n) nhưng chậm hơn Quick Sort</li>
+                        <li><strong>Insertion Sort:</strong> Nhanh với dữ liệu nhỏ nhưng chậm với dữ liệu lớn</li>
+                    </ul>
+                </div>
+                
+                <h2>8. Ứng dụng thực tế</h2>
+                <p>Quick Sort được sử dụng rộng rãi trong:</p>
+                <ul>
+                    <li>Hệ điều hành (sắp xếp file, process)</li>
+                    <li>Database (ORDER BY clause)</li>
+                    <li>Game development (sắp xếp object theo distance)</li>
+                    <li>Machine Learning (sắp xếp feature)</li>
+                </ul>
+                
+                <h2>9. Kết luận</h2>
+                <p>Quick Sort là một thuật toán mạnh mẽ và hiệu quả, đặc biệt phù hợp với dữ liệu lớn. Mặc dù có trường hợp tệ nhất O(n²), nhưng với việc chọn pivot thông minh và randomized approach, Quick Sort vẫn là lựa chọn hàng đầu cho việc sắp xếp.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Bài tập thực hành:</strong>
+                    <ul>
+                        <li>Implement Quick Sort với pivot là phần tử giữa</li>
+                        <li>So sánh hiệu suất Quick Sort với Merge Sort</li>
+                        <li>Viết chương trình sắp xếp danh sách sinh viên theo điểm số</li>
+                    </ul>
+                </div>
+                
+                <p>Trong bài viết tiếp theo, chúng ta sẽ tìm hiểu về thuật toán Merge Sort và so sánh hiệu suất với Quick Sort. Hãy theo dõi blog để không bỏ lỡ những kiến thức bổ ích!</p>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

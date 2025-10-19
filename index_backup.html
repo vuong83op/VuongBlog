@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Blog Cá Nhân - Sinh viên CNTT HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Fallback styles để đảm bảo text hiển thị đúng */
+        body {
+            font-family: 'Roboto', 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .highlight {
+            color: #ffd700 !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold !important;
+            display: inline;
+        }
+        
+        .hero-title {
+            font-size: 3rem !important;
+            font-weight: 700 !important;
+            margin-bottom: 1rem !important;
+            line-height: 1.2 !important;
+            color: #ffffff;
+        }
+        
+        .hero-title .highlight {
+            color: #ffd700 !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+            font-weight: bold !important;
+        }
+        
+        /* Đảm bảo text không bị ẩn */
+        .hero-text {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Fallback cho trường hợp CSS không load */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', 'Arial', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#home" class="logo">
+                    <span class="logo-text">Blog HUTECH</span>
+                </a>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Trang chủ</a></li>
+                        <li><a href="#about" class="nav-link">Giới thiệu</a></li>
+                        <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="header-search">
+                    <div class="search-input-group">
+                        <input type="text" placeholder="Tìm kiếm bài viết..." class="search-input">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1 class="hero-title">
+                                Xin chào, tôi là <span class="highlight">Trần Văn Vương</span>
+                            </h1>
+                            <p class="hero-subtitle">Sinh viên ngành Công nghệ Thông tin tại HUTECH</p>
+                            <p class="hero-description">
+                                Chào mừng bạn đến với blog cá nhân của tôi! Tôi chia sẻ những kiến thức về lập trình, 
+                                dự án cá nhân và kinh nghiệm học tập trong lĩnh vực CNTT.
+                            </p>
+                            <div class="hero-buttons">
+                                <a href="#about" class="btn btn-primary">Tìm hiểu về tôi</a>
+                                <a href="#contact" class="btn btn-outline-primary">Liên hệ</a>
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <div class="profile-card">
+                                <div class="profile-avatar">👨‍💻</div>
+                                <h3>Trần Văn Vương</h3>
+                                <p>Sinh viên CNTT HUTECH</p>
+                                <div class="profile-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">6</span>
+                                        <span class="stat-label">Bài viết</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">1.2k</span>
+                                        <span class="stat-label">Lượt xem</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">5</span>
+                                        <span class="stat-label">Dự án</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Posts -->
+            <div class="featured-posts">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Bài viết nổi bật</h2>
+                        <p class="section-subtitle">Những bài viết được quan tâm nhiều nhất</p>
+                    </div>
+                    <div class="posts-grid">
+                        <article class="post-card featured">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250/007bff/ffffff?text=C%23+Programming" alt="C# Programming">
+                                <div class="post-category">
+                                    <span>🏷️</span>
+                                    <span>C# Programming</span>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">
+                                    <a href="#blog-1">Học C# từ cơ bản đến nâng cao - Phần 1</a>
+                                </h3>
+                                <p class="post-excerpt">C# là một ngôn ngữ lập trình mạnh mẽ và phổ biến. Trong bài viết này, tôi sẽ chia sẻ kinh nghiệm học C# từ những kiến thức cơ bản nhất.</p>
+                                <div class="post-meta">
+                                    <div class="post-author">👤 Trần Văn Vương</div>
+                                    <div class="post-date">📅 15/01/2024</div>
+                                    <div class="post-read-time">⏱️ 5 phút</div>
+                                    <div class="post-views">👁️ 1,250</div>
+                                </div>
+                                <a href="#blog-1" class="read-more">Đọc tiếp →</a>
+                            </div>
+                        </article>
+
+                        <article class="post-card featured">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250/28a745/ffffff?text=Quick+Sort" alt="Quick Sort">
+                                <div class="post-category">
+                                    <span>🏷️</span>
+                                    <span>Thuật toán</span>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">
+                                    <a href="#blog-2">Thuật toán sắp xếp nhanh (Quick Sort)</a>
+                                </h3>
+                                <p class="post-excerpt">Quick Sort là một trong những thuật toán sắp xếp hiệu quả nhất. Bài viết này sẽ giải thích chi tiết cách hoạt động và cách implement trong C#.</p>
+                                <div class="post-meta">
+                                    <div class="post-author">👤 Trần Văn Vương</div>
+                                    <div class="post-date">📅 10/01/2024</div>
+                                    <div class="post-read-time">⏱️ 8 phút</div>
+                                    <div class="post-views">👁️ 980</div>
+                                </div>
+                                <a href="#blog-2" class="read-more">Đọc tiếp →</a>
+                            </div>
+                        </article>
+
+                        <article class="post-card featured">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250/dc3545/ffffff?text=ASP.NET+Core" alt="ASP.NET Core">
+                                <div class="post-category">
+                                    <span>🏷️</span>
+                                    <span>Web Development</span>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <h3 class="post-title">
+                                    <a href="#blog-3">Xây dựng ứng dụng Web API với ASP.NET Core</a>
+                                </h3>
+                                <p class="post-excerpt">Hướng dẫn chi tiết cách tạo Web API với ASP.NET Core, từ cơ bản đến các tính năng nâng cao như authentication, validation và documentation.</p>
+                                <div class="post-meta">
+                                    <div class="post-author">👤 Trần Văn Vương</div>
+                                    <div class="post-date">📅 05/01/2024</div>
+                                    <div class="post-read-time">⏱️ 12 phút</div>
+                                    <div class="post-views">👁️ 1,450</div>
+                                </div>
+                                <a href="#blog-3" class="read-more">Đọc tiếp →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Posts -->
+            <div class="recent-posts">
+                <div class="container">
+                    <div class="blog-layout">
+                        <div class="main-content">
+                            <div class="section-header">
+                                <h2 class="section-title">Bài viết mới nhất</h2>
+                                <p class="section-subtitle">Cập nhật những kiến thức mới nhất</p>
+                            </div>
+                            <div class="posts-list">
+                                <article class="post-card horizontal">
+                                    <div class="post-image">
+                                        <img src="https://via.placeholder.com/200x150/ffc107/000000?text=Internship" alt="Internship">
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-category">
+                                            <span>🏷️</span>
+                                            <span>Kinh nghiệm</span>
+                                        </div>
+                                        <h3 class="post-title">
+                                            <a href="#blog-4">Kinh nghiệm thực tập tại công ty công nghệ</a>
+                                        </h3>
+                                        <p class="post-excerpt">Chia sẻ kinh nghiệm thực tập tại công ty công nghệ, từ cách chuẩn bị CV, phỏng vấn đến những kỹ năng cần thiết để thành công.</p>
+                                        <div class="post-meta">
+                                            <div class="post-author">👤 Trần Văn Vương</div>
+                                            <div class="post-date">📅 01/01/2024</div>
+                                            <div class="post-read-time">⏱️ 6 phút</div>
+                                            <div class="post-views">👁️ 2,100</div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="post-card horizontal">
+                                    <div class="post-image">
+                                        <img src="https://via.placeholder.com/200x150/17a2b8/ffffff?text=SQL+Server" alt="SQL Server">
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-category">
+                                            <span>🏷️</span>
+                                            <span>Database</span>
+                                        </div>
+                                        <h3 class="post-title">
+                                            <a href="#blog-5">Làm việc với Database SQL Server</a>
+                                        </h3>
+                                        <p class="post-excerpt">Hướng dẫn chi tiết cách làm việc với SQL Server, từ cài đặt, tạo database đến các query phức tạp và optimization.</p>
+                                        <div class="post-meta">
+                                            <div class="post-author">👤 Trần Văn Vương</div>
+                                            <div class="post-date">📅 28/12/2023</div>
+                                            <div class="post-read-time">⏱️ 10 phút</div>
+                                            <div class="post-views">👁️ 1,680</div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="post-card horizontal">
+                                    <div class="post-image">
+                                        <img src="https://via.placeholder.com/200x150/6f42c1/ffffff?text=Student+Life" alt="Student Life">
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-category">
+                                            <span>🏷️</span>
+                                            <span>Cuộc sống sinh viên</span>
+                                        </div>
+                                        <h3 class="post-title">
+                                            <a href="#blog-6">Cuộc sống sinh viên CNTT - Cân bằng giữa học tập và giải trí</a>
+                                        </h3>
+                                        <p class="post-excerpt">Chia sẻ về cuộc sống sinh viên ngành CNTT, cách cân bằng giữa việc học, làm project và thời gian giải trí.</p>
+                                        <div class="post-meta">
+                                            <div class="post-author">👤 Trần Văn Vương</div>
+                                            <div class="post-date">📅 25/12/2023</div>
+                                            <div class="post-read-time">⏱️ 4 phút</div>
+                                            <div class="post-views">👁️ 3,200</div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <aside class="sidebar">
+                            <div class="sidebar-widget">
+                                <h3 class="widget-title">Danh mục</h3>
+                                <ul class="category-list">
+                                    <li><a href="#category-csharp" class="category-link">🏷️ C# Programming (1)</a></li>
+                                    <li><a href="#category-algorithm" class="category-link">🏷️ Thuật toán (1)</a></li>
+                                    <li><a href="#category-web" class="category-link">🏷️ Web Development (1)</a></li>
+                                    <li><a href="#category-database" class="category-link">🏷️ Database (1)</a></li>
+                                    <li><a href="#category-experience" class="category-link">🏷️ Kinh nghiệm (1)</a></li>
+                                    <li><a href="#category-student" class="category-link">🏷️ Cuộc sống sinh viên (1)</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="sidebar-widget">
+                                <h3 class="widget-title">Bài viết phổ biến</h3>
+                                <div class="popular-posts">
+                                    <div class="popular-post">
+                                        <div class="popular-post-image">
+                                            <img src="https://via.placeholder.com/60x60/6f42c1/ffffff?text=SL" alt="Student Life">
+                                        </div>
+                                        <div class="popular-post-content">
+                                            <h4 class="popular-post-title">
+                                                <a href="#blog-6">Cuộc sống sinh viên CNTT</a>
+                                            </h4>
+                                            <div class="popular-post-meta">
+                                                <span>25/12/2023</span>
+                                                <span>3,200 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="popular-post">
+                                        <div class="popular-post-image">
+                                            <img src="https://via.placeholder.com/60x60/ffc107/000000?text=IN" alt="Internship">
+                                        </div>
+                                        <div class="popular-post-content">
+                                            <h4 class="popular-post-title">
+                                                <a href="#blog-4">Kinh nghiệm thực tập</a>
+                                            </h4>
+                                            <div class="popular-post-meta">
+                                                <span>01/01/2024</span>
+                                                <span>2,100 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="popular-post">
+                                        <div class="popular-post-image">
+                                            <img src="https://via.placeholder.com/60x60/dc3545/ffffff?text=API" alt="API">
+                                        </div>
+                                        <div class="popular-post-content">
+                                            <h4 class="popular-post-title">
+                                                <a href="#blog-3">Web API với ASP.NET Core</a>
+                                            </h4>
+                                            <div class="popular-post-meta">
+                                                <span>05/01/2024</span>
+                                                <span>1,450 lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sidebar-widget">
+                                <h3 class="widget-title">Thống kê</h3>
+                                <div class="stats-widget">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Tổng bài viết</span>
+                                        <span class="stat-value">6</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Danh mục</span>
+                                        <span class="stat-value">6</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Lượt xem</span>
+                                        <span class="stat-value">10.5k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="about">
+                <div class="container">
+                    <!-- Hero Section -->
+                    <div class="about-hero">
+                        <div class="hero-content">
+                            <div class="hero-image">
+                                <div class="profile-image">👨‍💻</div>
+                            </div>
+                            <div class="hero-text">
+                                <h1 class="hero-title">Xin chào, tôi là <span class="highlight">Trần Văn Vương</span></h1>
+                                <p class="hero-subtitle">Sinh viên ngành Công nghệ Thông tin tại HUTECH</p>
+                                <p class="hero-description">
+                                    Tôi là một sinh viên đam mê lập trình và công nghệ. Với niềm yêu thích học hỏi và khám phá 
+                                    những điều mới, tôi luôn cố gắng phát triển kỹ năng lập trình và chia sẻ kiến thức với mọi người.
+                                </p>
+                                <div class="hero-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">3</span>
+                                        <span class="stat-label">Năm học</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">5+</span>
+                                        <span class="stat-label">Dự án</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">6</span>
+                                        <span class="stat-label">Bài viết</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="personal-info">
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <span>👤</span>
+                                    <h3>Thông tin cá nhân</h3>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-item">
+                                        <strong>Họ tên:</strong> Trần Văn Vương
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Ngày sinh:</strong> 15/03/2003
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Quê quán:</strong> TP. Hồ Chí Minh
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Email:</strong> student@hutech.edu.vn
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Điện thoại:</strong> 0123 456 789
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <span>🎓</span>
+                                    <h3>Học vấn</h3>
+                                </div>
+                                <div class="info-content">
+                                    <div class="education-item">
+                                        <div class="education-period">2021 - 2025</div>
+                                        <div class="education-details">
+                                            <h4>Đại học Công nghệ TP.HCM (HUTECH)</h4>
+                                            <p>Ngành: Công nghệ Thông tin</p>
+                                            <p>Chuyên ngành: Phát triển phần mềm</p>
+                                            <p>GPA: 3.5/4.0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <span>📍</span>
+                                    <h3>Liên hệ</h3>
+                                </div>
+                                <div class="info-content">
+                                    <div class="contact-item">
+                                        <span>📍</span>
+                                        <span>475A Điện Biên Phủ, P.25, Q.Bình Thạnh, TP.HCM</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <span>📧</span>
+                                        <span>student@hutech.edu.vn</span>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="https://github.com" class="social-link">🐙</a>
+                                        <a href="https://linkedin.com" class="social-link">💼</a>
+                                        <a href="https://facebook.com" class="social-link">📘</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <div class="skills-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Kỹ năng lập trình</h2>
+                            <p class="section-subtitle">Những công nghệ và ngôn ngữ lập trình tôi đang học và sử dụng</p>
+                        </div>
+                        <div class="skills-grid">
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span>💻</span>
+                                    <h4>C# Programming</h4>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span>🌐</span>
+                                    <h4>ASP.NET Core</h4>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 80%"></div>
+                                    </div>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span>🗄️</span>
+                                    <h4>SQL Server</h4>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span class="skill-level">75%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span>💻</span>
+                                    <h4>HTML/CSS/JavaScript</h4>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span>⚛️</span>
+                                    <h4>ReactJS</h4>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 70%"></div>
+                                    </div>
+                                    <span class="skill-level">70%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <span>🐙</span>
+                                    <h4>Git/GitHub</h4>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 80%"></div>
+                                    </div>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Section -->
+                    <div class="projects-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Dự án tiêu biểu</h2>
+                            <p class="section-subtitle">Những dự án tôi đã thực hiện trong quá trình học tập</p>
+                        </div>
+                        <div class="projects-grid">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="https://via.placeholder.com/300x200/007bff/ffffff?text=Library+Management" alt="Library Management">
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title">Hệ thống quản lý thư viện</h3>
+                                    <p class="project-description">Ứng dụng web quản lý thư viện sử dụng ASP.NET Core và SQL Server</p>
+                                    <div class="project-technologies">
+                                        <span class="tech-tag">C#</span>
+                                        <span class="tech-tag">ASP.NET Core</span>
+                                        <span class="tech-tag">SQL Server</span>
+                                        <span class="tech-tag">Bootstrap</span>
+                                    </div>
+                                    <a href="#" class="project-link">Xem chi tiết</a>
+                                </div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="https://via.placeholder.com/300x200/28a745/ffffff?text=E-commerce+Website" alt="E-commerce Website">
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title">Website bán hàng online</h3>
+                                    <p class="project-description">E-commerce website với ReactJS và Node.js</p>
+                                    <div class="project-technologies">
+                                        <span class="tech-tag">ReactJS</span>
+                                        <span class="tech-tag">Node.js</span>
+                                        <span class="tech-tag">MongoDB</span>
+                                        <span class="tech-tag">Stripe</span>
+                                    </div>
+                                    <a href="#" class="project-link">Xem chi tiết</a>
+                                </div>
+                            </div>
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <img src="https://via.placeholder.com/300x200/dc3545/ffffff?text=Student+Management" alt="Student Management">
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title">Ứng dụng quản lý sinh viên</h3>
+                                    <p class="project-description">Desktop application quản lý thông tin sinh viên</p>
+                                    <div class="project-technologies">
+                                        <span class="tech-tag">C#</span>
+                                        <span class="tech-tag">WinForms</span>
+                                        <span class="tech-tag">SQL Server</span>
+                                        <span class="tech-tag">Entity Framework</span>
+                                    </div>
+                                    <a href="#" class="project-link">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div class="cta-section">
+                        <div class="cta-content">
+                            <h2>Hãy kết nối với tôi!</h2>
+                            <p>Tôi luôn sẵn sàng trao đổi về lập trình, học tập và những dự án thú vị.</p>
+                            <div class="cta-buttons">
+                                <a href="#contact" class="btn btn-primary">Liên hệ ngay</a>
+                                <a href="#home" class="btn btn-outline-primary">Xem blog</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact">
+                <div class="container">
+                    <!-- Header -->
+                    <div class="contact-header">
+                        <h1 class="contact-title">Liên hệ với tôi</h1>
+                        <p class="contact-subtitle">
+                            Tôi luôn sẵn sàng lắng nghe và trả lời mọi câu hỏi của bạn. 
+                            Hãy gửi tin nhắn cho tôi nhé!
+                        </p>
+                    </div>
+
+                    <div class="contact-content">
+                        <!-- Contact Info -->
+                        <div class="contact-info-section">
+                            <h2 class="section-title">Thông tin liên hệ</h2>
+                            <div class="contact-info-grid">
+                                <div class="contact-info-card">
+                                    <div class="info-icon">📧</div>
+                                    <div class="info-content">
+                                        <h3 class="info-title">Email</h3>
+                                        <p class="info-value">student@hutech.edu.vn</p>
+                                        <p class="info-description">Gửi email cho tôi bất cứ lúc nào</p>
+                                    </div>
+                                </div>
+                                <div class="contact-info-card">
+                                    <div class="info-icon">📞</div>
+                                    <div class="info-content">
+                                        <h3 class="info-title">Điện thoại</h3>
+                                        <p class="info-value">0123 456 789</p>
+                                        <p class="info-description">Gọi điện từ 8:00 - 22:00</p>
+                                    </div>
+                                </div>
+                                <div class="contact-info-card">
+                                    <div class="info-icon">📍</div>
+                                    <div class="info-content">
+                                        <h3 class="info-title">Địa chỉ</h3>
+                                        <p class="info-value">475A Điện Biên Phủ, P.25, Q.Bình Thạnh</p>
+                                        <p class="info-description">Trường Đại học Công nghệ TP.HCM</p>
+                                    </div>
+                                </div>
+                                <div class="contact-info-card">
+                                    <div class="info-icon">🕒</div>
+                                    <div class="info-content">
+                                        <h3 class="info-title">Thời gian</h3>
+                                        <p class="info-value">Thứ 2 - Thứ 6: 8:00 - 17:00</p>
+                                        <p class="info-description">Thứ 7: 8:00 - 12:00</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Map Section -->
+                            <div class="map-section">
+                                <h3 class="map-title">Vị trí trường HUTECH</h3>
+                                <div class="map-container">
+                                    <div class="map-placeholder">
+                                        <span>📍</span>
+                                        <p>Trường Đại học Công nghệ TP.HCM</p>
+                                        <p>475A Điện Biên Phủ, P.25, Q.Bình Thạnh, TP.HCM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="contact-form-section">
+                            <h2 class="section-title">Gửi tin nhắn</h2>
+                            <form class="contact-form" onsubmit="handleSubmit(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">Họ và tên *</label>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="Nhập họ và tên của bạn" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email *</label>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email của bạn" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject" class="form-label">Chủ đề</label>
+                                    <input type="text" id="subject" name="subject" class="form-control" placeholder="Nhập chủ đề tin nhắn">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Nội dung tin nhắn *</label>
+                                    <textarea id="message" name="message" class="form-control" rows="6" placeholder="Viết tin nhắn của bạn ở đây..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary submit-btn">
+                                    📤 Gửi tin nhắn
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="faq-section">
+                        <h2 class="section-title">Câu hỏi thường gặp</h2>
+                        <div class="faq-grid">
+                            <div class="faq-item">
+                                <h3 class="faq-question">Tôi có thể liên hệ với bạn qua cách nào?</h3>
+                                <p class="faq-answer">
+                                    Bạn có thể liên hệ với tôi qua email, điện thoại hoặc sử dụng form liên hệ trên trang này. 
+                                    Tôi sẽ phản hồi trong vòng 24 giờ.
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="faq-question">Bạn có nhận tư vấn về lập trình không?</h3>
+                                <p class="faq-answer">
+                                    Có, tôi rất vui được chia sẻ kiến thức và kinh nghiệm lập trình với các bạn sinh viên. 
+                                    Hãy gửi câu hỏi cụ thể cho tôi nhé!
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="faq-question">Làm thế nào để cộng tác trong dự án?</h3>
+                                <p class="faq-answer">
+                                    Tôi luôn sẵn sàng tham gia các dự án thú vị. Hãy mô tả chi tiết về dự án và tôi sẽ 
+                                    phản hồi sớm nhất có thể.
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="faq-question">Bạn có dạy lập trình không?</h3>
+                                <p class="faq-answer">
+                                    Tôi có thể hướng dẫn và chia sẻ kinh nghiệm học lập trình. Tuy nhiên, tôi chưa có 
+                                    kinh nghiệm giảng dạy chính thức.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Về Blog</h3>
+                    <p class="footer-description">
+                        Blog cá nhân chia sẻ kiến thức lập trình, dự án và kinh nghiệm học tập 
+                        của sinh viên CNTT HUTECH.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://github.com" class="social-link">🐙</a>
+                        <a href="https://linkedin.com" class="social-link">💼</a>
+                        <a href="https://facebook.com" class="social-link">📘</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Liên kết nhanh</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Trang chủ</a></li>
+                        <li><a href="#about" class="footer-link">Giới thiệu</a></li>
+                        <li><a href="#contact" class="footer-link">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Danh mục</h3>
+                    <ul class="footer-links">
+                        <li><a href="#category-csharp" class="footer-link">C# Programming</a></li>
+                        <li><a href="#category-web" class="footer-link">Web Development</a></li>
+                        <li><a href="#category-database" class="footer-link">Database</a></li>
+                        <li><a href="#category-experience" class="footer-link">Kinh nghiệm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Thông tin liên hệ</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <span>student@hutech.edu.vn</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>Trường Đại học Công nghệ TP.HCM (HUTECH)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        © 2025 Blog cá nhân - Trần Văn Vương - Sinh viên CNTT HUTECH. Tất cả quyền được bảo lưu.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <script src="script.js"></script>
+    <script>
+        // Kiểm tra và đảm bảo text hiển thị đúng
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== DEBUG WEBSITE ===');
+            
+            // Kiểm tra xem text có hiển thị không
+            const heroTitle = document.querySelector('.hero-title');
+            if (heroTitle) {
+                console.log('✅ Hero title found:', heroTitle.textContent);
+                
+                // Đảm bảo text không bị ẩn
+                heroTitle.style.display = 'block';
+                heroTitle.style.visibility = 'visible';
+                heroTitle.style.opacity = '1';
+                
+                // Kiểm tra highlight element
+                const highlightElement = heroTitle.querySelector('.highlight');
+                if (highlightElement) {
+                    console.log('✅ Highlight element found:', highlightElement.textContent);
+                    
+                    // Force apply styles
+                    highlightElement.style.color = '#ffd700';
+                    highlightElement.style.fontWeight = 'bold';
+                    highlightElement.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.3)';
+                    highlightElement.style.display = 'inline';
+                    
+                    // Kiểm tra computed styles
+                    const computedStyle = window.getComputedStyle(highlightElement);
+                    console.log('✅ Highlight computed color:', computedStyle.color);
+                    console.log('✅ Highlight computed font-weight:', computedStyle.fontWeight);
+                } else {
+                    console.error('❌ Highlight element NOT found!');
+                }
+            } else {
+                console.error('❌ Hero title NOT found!');
+            }
+            
+            // Kiểm tra CSS có load không
+            const testElement = document.createElement('div');
+            testElement.className = 'highlight';
+            testElement.style.position = 'absolute';
+            testElement.style.left = '-9999px';
+            testElement.textContent = 'Test';
+            document.body.appendChild(testElement);
+            
+            const computedStyle = window.getComputedStyle(testElement);
+            console.log('✅ CSS highlight color:', computedStyle.color);
+            console.log('✅ CSS highlight font-weight:', computedStyle.fontWeight);
+            
+            document.body.removeChild(testElement);
+            
+            // Force refresh CSS
+            const links = document.querySelectorAll('link[rel="stylesheet"]');
+            links.forEach(link => {
+                const href = link.href;
+                link.href = href + '?v=' + Date.now();
+            });
+            
+            console.log('=== END DEBUG ===');
+        });
+    </script>
+</body>
+</html>

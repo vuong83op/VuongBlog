@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Làm việc với Database SQL Server | Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Post Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .blog-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .blog-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'SQL';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .sql-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .feature-card h4 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .query-examples {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid var(--neon-pink);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .performance-tips {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="blog-category">Database</div>
+                <h1 class="blog-title">Làm việc với Database SQL Server</h1>
+                <div class="blog-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 28/12/2023</span>
+                    <span>⏱️ 10 phút đọc</span>
+                    <span>👁️ 1,680 lượt xem</span>
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                <p>SQL Server là một trong những hệ quản trị cơ sở dữ liệu phổ biến nhất hiện nay. Trong bài viết này, tôi sẽ hướng dẫn chi tiết cách làm việc với SQL Server, từ cài đặt, tạo database đến các query phức tạp và optimization.</p>
+                
+                <h2>1. Giới thiệu về SQL Server</h2>
+                <p>Microsoft SQL Server là một hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) được phát triển bởi Microsoft. Nó hỗ trợ Transact-SQL (T-SQL) và cung cấp nhiều tính năng mạnh mẽ cho việc quản lý dữ liệu.</p>
+                
+                <div class="sql-features">
+                    <div class="feature-card">
+                        <h4>🚀 Hiệu suất cao</h4>
+                        <p>Optimized cho enterprise applications</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔒 Bảo mật</h4>
+                        <p>Encryption, authentication, authorization</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Analytics</h4>
+                        <p>Business Intelligence và reporting</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>☁️ Cloud Ready</h4>
+                        <p>Azure SQL Database integration</p>
+                    </div>
+                </div>
+                
+                <h2>2. Cài đặt SQL Server</h2>
+                <h3>2.1. SQL Server Express (Miễn phí)</h3>
+                <p>Để bắt đầu học, bạn có thể sử dụng SQL Server Express:</p>
+                <ul>
+                    <li>Tải về từ trang chủ Microsoft</li>
+                    <li>Dung lượng database tối đa 10GB</li>
+                    <li>Phù hợp cho development và học tập</li>
+                </ul>
+                
+                <h3>2.2. SQL Server Management Studio (SSMS)</h3>
+                <p>SSMS là công cụ chính để quản lý SQL Server:</p>
+                <ul>
+                    <li>Giao diện đồ họa thân thiện</li>
+                    <li>Query editor với IntelliSense</li>
+                    <li>Database design tools</li>
+                    <li>Performance monitoring</li>
+                </ul>
+                
+                <h2>3. Tạo Database đầu tiên</h2>
+                <div class="code-block">
+                    <pre><code>-- Tạo database
+CREATE DATABASE StudentManagement;
+
+-- Sử dụng database
+USE StudentManagement;
+
+-- Tạo bảng Students
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY IDENTITY(1,1),
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100) UNIQUE NOT NULL,
+    DateOfBirth DATE,
+    Major NVARCHAR(50),
+    GPA DECIMAL(3,2),
+    CreatedDate DATETIME2 DEFAULT GETDATE()
+);
+
+-- Tạo bảng Courses
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY IDENTITY(1,1),
+    CourseName NVARCHAR(100) NOT NULL,
+    Credits INT NOT NULL,
+    Department NVARCHAR(50),
+    Description NVARCHAR(500)
+);
+
+-- Tạo bảng Enrollments
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY IDENTITY(1,1),
+    StudentID INT FOREIGN KEY REFERENCES Students(StudentID),
+    CourseID INT FOREIGN KEY REFERENCES Courses(CourseID),
+    EnrollmentDate DATETIME2 DEFAULT GETDATE(),
+    Grade DECIMAL(3,2),
+    CONSTRAINT PK_Enrollments PRIMARY KEY (StudentID, CourseID)
+);</code></pre>
+                </div>
+                
+                <h2>4. CRUD Operations cơ bản</h2>
+                <h3>4.1. INSERT - Thêm dữ liệu</h3>
+                <div class="code-block">
+                    <pre><code>-- Thêm sinh viên mới
+INSERT INTO Students (FirstName, LastName, Email, DateOfBirth, Major, GPA)
+VALUES 
+    (N'Nguyễn', N'Văn A', 'nguyenvana@email.com', '2000-01-15', N'Công nghệ thông tin', 3.5),
+    (N'Trần', N'Thị B', 'tranthib@email.com', '1999-05-20', N'Khoa học máy tính', 3.8),
+    (N'Lê', N'Văn C', 'levanc@email.com', '2001-03-10', N'Kỹ thuật phần mềm', 3.2);
+
+-- Thêm khóa học
+INSERT INTO Courses (CourseName, Credits, Department, Description)
+VALUES 
+    (N'Lập trình C#', 3, N'CNTT', N'Khóa học lập trình C# từ cơ bản đến nâng cao'),
+    (N'Cơ sở dữ liệu', 3, N'CNTT', N'Nguyên lý và thực hành cơ sở dữ liệu'),
+    (N'Thuật toán', 4, N'CNTT', N'Các thuật toán cơ bản và nâng cao');</code></pre>
+                </div>
+                
+                <h3>4.2. SELECT - Truy vấn dữ liệu</h3>
+                <div class="code-block">
+                    <pre><code>-- Lấy tất cả sinh viên
+SELECT * FROM Students;
+
+-- Lấy sinh viên có GPA > 3.5
+SELECT FirstName, LastName, Email, GPA
+FROM Students 
+WHERE GPA > 3.5
+ORDER BY GPA DESC;
+
+-- Join bảng để lấy thông tin đăng ký khóa học
+SELECT 
+    s.FirstName + ' ' + s.LastName AS FullName,
+    c.CourseName,
+    e.EnrollmentDate,
+    e.Grade
+FROM Students s
+INNER JOIN Enrollments e ON s.StudentID = e.StudentID
+INNER JOIN Courses c ON e.CourseID = c.CourseID
+WHERE e.Grade IS NOT NULL;</code></pre>
+                </div>
+                
+                <h3>4.3. UPDATE - Cập nhật dữ liệu</h3>
+                <div class="code-block">
+                    <pre><code>-- Cập nhật GPA của sinh viên
+UPDATE Students 
+SET GPA = 3.9
+WHERE StudentID = 1;
+
+-- Cập nhật điểm cho tất cả sinh viên trong khóa học
+UPDATE Enrollments 
+SET Grade = 4.0
+WHERE CourseID = 1 AND Grade IS NULL;</code></pre>
+                </div>
+                
+                <h3>4.4. DELETE - Xóa dữ liệu</h3>
+                <div class="code-block">
+                    <pre><code>-- Xóa sinh viên có GPA < 2.0
+DELETE FROM Students 
+WHERE GPA < 2.0;
+
+-- Xóa tất cả đăng ký của sinh viên cụ thể
+DELETE FROM Enrollments 
+WHERE StudentID = 1;</code></pre>
+                </div>
+                
+                <h2>5. Query nâng cao</h2>
+                <h3>5.1. Aggregate Functions</h3>
+                <div class="code-block">
+                    <pre><code>-- Thống kê GPA
+SELECT 
+    COUNT(*) AS TotalStudents,
+    AVG(GPA) AS AverageGPA,
+    MIN(GPA) AS MinGPA,
+    MAX(GPA) AS MaxGPA
+FROM Students;
+
+-- Thống kê theo chuyên ngành
+SELECT 
+    Major,
+    COUNT(*) AS StudentCount,
+    AVG(GPA) AS AverageGPA
+FROM Students
+GROUP BY Major
+HAVING COUNT(*) > 1
+ORDER BY AverageGPA DESC;</code></pre>
+                </div>
+                
+                <h3>5.2. Subqueries</h3>
+                <div class="code-block">
+                    <pre><code>-- Tìm sinh viên có GPA cao nhất
+SELECT FirstName, LastName, GPA
+FROM Students
+WHERE GPA = (SELECT MAX(GPA) FROM Students);
+
+-- Tìm sinh viên đăng ký nhiều khóa học nhất
+SELECT s.FirstName, s.LastName, COUNT(e.CourseID) AS CourseCount
+FROM Students s
+INNER JOIN Enrollments e ON s.StudentID = e.StudentID
+GROUP BY s.StudentID, s.FirstName, s.LastName
+HAVING COUNT(e.CourseID) = (
+    SELECT MAX(CourseCount)
+    FROM (
+        SELECT COUNT(CourseID) AS CourseCount
+        FROM Enrollments
+        GROUP BY StudentID
+    ) AS MaxCourses
+);</code></pre>
+                </div>
+                
+                <h3>5.3. Window Functions</h3>
+                <div class="code-block">
+                    <pre><code>-- Xếp hạng sinh viên theo GPA
+SELECT 
+    FirstName,
+    LastName,
+    GPA,
+    RANK() OVER (ORDER BY GPA DESC) AS RankByGPA,
+    ROW_NUMBER() OVER (ORDER BY GPA DESC) AS RowNumber,
+    DENSE_RANK() OVER (ORDER BY GPA DESC) AS DenseRank
+FROM Students;
+
+-- Tính GPA trung bình theo chuyên ngành
+SELECT 
+    FirstName,
+    LastName,
+    Major,
+    GPA,
+    AVG(GPA) OVER (PARTITION BY Major) AS MajorAverageGPA
+FROM Students;</code></pre>
+                </div>
+                
+                <h2>6. Stored Procedures</h2>
+                <div class="code-block">
+                    <pre><code>-- Tạo stored procedure để thêm sinh viên
+CREATE PROCEDURE sp_AddStudent
+    @FirstName NVARCHAR(50),
+    @LastName NVARCHAR(50),
+    @Email NVARCHAR(100),
+    @DateOfBirth DATE,
+    @Major NVARCHAR(50),
+    @GPA DECIMAL(3,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    -- Kiểm tra email đã tồn tại chưa
+    IF EXISTS (SELECT 1 FROM Students WHERE Email = @Email)
+    BEGIN
+        RAISERROR('Email đã tồn tại!', 16, 1);
+        RETURN;
+    END
+    
+    -- Thêm sinh viên mới
+    INSERT INTO Students (FirstName, LastName, Email, DateOfBirth, Major, GPA)
+    VALUES (@FirstName, @LastName, @Email, @DateOfBirth, @Major, @GPA);
+    
+    SELECT 'Sinh viên đã được thêm thành công!' AS Message;
+END
+
+-- Gọi stored procedure
+EXEC sp_AddStudent 
+    @FirstName = N'Phạm',
+    @LastName = N'Văn D',
+    @Email = 'phamvand@email.com',
+    @DateOfBirth = '2000-08-15',
+    @Major = N'Công nghệ thông tin',
+    @GPA = 3.7;</code></pre>
+                </div>
+                
+                <h2>7. Functions</h2>
+                <div class="code-block">
+                    <pre><code>-- Tạo function tính tuổi
+CREATE FUNCTION fn_CalculateAge(@DateOfBirth DATE)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Age INT;
+    SET @Age = DATEDIFF(YEAR, @DateOfBirth, GETDATE());
+    
+    -- Điều chỉnh nếu chưa đến sinh nhật trong năm nay
+    IF (MONTH(@DateOfBirth) > MONTH(GETDATE()) OR 
+        (MONTH(@DateOfBirth) = MONTH(GETDATE()) AND DAY(@DateOfBirth) > DAY(GETDATE())))
+    BEGIN
+        SET @Age = @Age - 1;
+    END
+    
+    RETURN @Age;
+END
+
+-- Sử dụng function
+SELECT 
+    FirstName,
+    LastName,
+    DateOfBirth,
+    dbo.fn_CalculateAge(DateOfBirth) AS Age
+FROM Students;</code></pre>
+                </div>
+                
+                <h2>8. Indexes và Performance</h2>
+                <div class="performance-tips">
+                    <h3>🚀 Performance Optimization Tips:</h3>
+                    <ul>
+                        <li><strong>Indexes:</strong> Tạo index cho các cột thường xuyên query</li>
+                        <li><strong>Query Plan:</strong> Sử dụng Execution Plan để tối ưu</li>
+                        <li><strong>Statistics:</strong> Cập nhật statistics thường xuyên</li>
+                        <li><strong>Partitioning:</strong> Chia nhỏ bảng lớn</li>
+                    </ul>
+                </div>
+                
+                <div class="code-block">
+                    <pre><code>-- Tạo index cho cột thường xuyên query
+CREATE INDEX IX_Students_Email ON Students(Email);
+CREATE INDEX IX_Students_GPA ON Students(GPA);
+CREATE INDEX IX_Enrollments_StudentID ON Enrollments(StudentID);
+
+-- Composite index
+CREATE INDEX IX_Students_Major_GPA ON Students(Major, GPA);
+
+-- Kiểm tra index usage
+SELECT 
+    i.name AS IndexName,
+    s.user_seeks,
+    s.user_scans,
+    s.user_lookups
+FROM sys.indexes i
+LEFT JOIN sys.dm_db_index_usage_stats s ON i.object_id = s.object_id AND i.index_id = s.index_id
+WHERE i.object_id = OBJECT_ID('Students');</code></pre>
+                </div>
+                
+                <h2>9. Backup và Recovery</h2>
+                <div class="code-block">
+                    <pre><code>-- Backup database
+BACKUP DATABASE StudentManagement
+TO DISK = 'C:\Backup\StudentManagement.bak'
+WITH FORMAT, INIT, NAME = 'StudentManagement Full Backup';
+
+-- Restore database
+RESTORE DATABASE StudentManagement
+FROM DISK = 'C:\Backup\StudentManagement.bak'
+WITH REPLACE;
+
+-- Backup transaction log
+BACKUP LOG StudentManagement
+TO DISK = 'C:\Backup\StudentManagement.trn';</code></pre>
+                </div>
+                
+                <h2>10. Security</h2>
+                <div class="code-block">
+                    <pre><code>-- Tạo login
+CREATE LOGIN [StudentApp] WITH PASSWORD = 'StrongPassword123!';
+
+-- Tạo user trong database
+USE StudentManagement;
+CREATE USER [StudentApp] FOR LOGIN [StudentApp];
+
+-- Cấp quyền
+GRANT SELECT, INSERT, UPDATE, DELETE ON Students TO [StudentApp];
+GRANT SELECT ON Courses TO [StudentApp];
+
+-- Tạo role
+CREATE ROLE [StudentManager];
+ALTER ROLE [StudentManager] ADD MEMBER [StudentApp];
+
+-- Encryption
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'MasterKeyPassword123!';
+CREATE CERTIFICATE StudentCert WITH SUBJECT = 'Student Data Encryption';
+CREATE SYMMETRIC KEY StudentKey WITH ALGORITHM = AES_256 ENCRYPTION BY CERTIFICATE StudentCert;</code></pre>
+                </div>
+                
+                <h2>11. Monitoring và Maintenance</h2>
+                <div class="query-examples">
+                    <h3>📊 Queries hữu ích cho monitoring:</h3>
+                    <ul>
+                        <li><strong>Database size:</strong> Kiểm tra kích thước database</li>
+                        <li><strong>Table statistics:</strong> Thống kê về các bảng</li>
+                        <li><strong>Index fragmentation:</strong> Kiểm tra fragmentation</li>
+                        <li><strong>Long running queries:</strong> Tìm queries chạy lâu</li>
+                    </ul>
+                </div>
+                
+                <h2>12. Kết luận</h2>
+                <p>SQL Server là một công cụ mạnh mẽ cho việc quản lý dữ liệu. Với những kiến thức cơ bản trong bài viết này, bạn đã có thể bắt đầu làm việc với SQL Server một cách hiệu quả.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Bài tập thực hành:</strong>
+                    <ul>
+                        <li>Tạo database quản lý thư viện</li>
+                        <li>Viết stored procedures cho CRUD operations</li>
+                        <li>Thiết kế và tối ưu indexes</li>
+                        <li>Implement backup strategy</li>
+                    </ul>
+                </div>
+                
+                <p>Trong bài viết tiếp theo, chúng ta sẽ tìm hiểu về Entity Framework và cách tích hợp với SQL Server. Hãy theo dõi blog để không bỏ lỡ những kiến thức bổ ích!</p>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

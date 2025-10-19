@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Admin Functions</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin: 10px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Test Admin Functions</h1>
+    
+    <div class="test-section">
+        <h3>Test Data</h3>
+        <button onclick="testData()">Kiểm tra dữ liệu</button>
+        <button onclick="testUpdate()">Test cập nhật</button>
+        <button onclick="testModal()">Test modal</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Test data
+        let testPosts = [
+            { id: 1, title: "Test Post 1", category: "Test", status: "published", views: 100, date: "01/01/2024", excerpt: "Test excerpt", content: "Test content" },
+            { id: 2, title: "Test Post 2", category: "Test", status: "draft", views: 50, date: "02/01/2024", excerpt: "Test excerpt 2", content: "Test content 2" }
+        ];
+
+        function testData() {
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <h4>Dữ liệu hiện tại:</h4>
+                <pre>${JSON.stringify(testPosts, null, 2)}</pre>
+            `;
+        }
+
+        function testUpdate() {
+            // Simulate update
+            const postIndex = testPosts.findIndex(p => p.id === 1);
+            if (postIndex !== -1) {
+                testPosts[postIndex].title = "Updated Test Post 1";
+                testPosts[postIndex].category = "Updated Category";
+                
+                const result = document.getElementById('result');
+                result.innerHTML = `
+                    <h4>Dữ liệu sau khi cập nhật:</h4>
+                    <pre>${JSON.stringify(testPosts, null, 2)}</pre>
+                `;
+            }
+        }
+
+        function testModal() {
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <h4>Test Modal:</h4>
+                <p>Modal functions should work if admin.js is loaded correctly.</p>
+                <p>Check browser console for any errors.</p>
+            `;
+        }
+
+        // Test if admin functions are available
+        window.addEventListener('load', function() {
+            console.log('Test page loaded');
+            if (typeof updatePost === 'function') {
+                console.log('✅ updatePost function is available');
+            } else {
+                console.log('❌ updatePost function is NOT available');
+            }
+        });
+    </script>
+</body>
+</html>

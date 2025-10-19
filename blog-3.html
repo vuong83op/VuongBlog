@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Xây dựng ứng dụng Web API với ASP.NET Core | Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Post Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .blog-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .blog-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'C#';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .api-endpoint {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-item {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid var(--neon-pink);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .feature-item h4 {
+            color: var(--neon-pink);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="blog-category">Web Development</div>
+                <h1 class="blog-title">Xây dựng ứng dụng Web API với ASP.NET Core</h1>
+                <div class="blog-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 05/01/2024</span>
+                    <span>⏱️ 12 phút đọc</span>
+                    <span>👁️ 1,450 lượt xem</span>
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                <p>ASP.NET Core là framework hiện đại và mạnh mẽ để xây dựng Web API. Trong bài viết này, tôi sẽ hướng dẫn chi tiết cách tạo Web API từ cơ bản đến các tính năng nâng cao như authentication, validation và documentation.</p>
+                
+                <h2>1. Giới thiệu về ASP.NET Core Web API</h2>
+                <p>ASP.NET Core Web API là một framework cho phép bạn xây dựng các dịch vụ HTTP có thể được truy cập từ nhiều client khác nhau như web applications, mobile apps, hoặc desktop applications.</p>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h4>🚀 Hiệu suất cao</h4>
+                        <p>Cross-platform, lightweight và nhanh</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔒 Bảo mật</h4>
+                        <p>Authentication, Authorization tích hợp</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📚 Documentation</h4>
+                        <p>Swagger/OpenAPI tự động</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔧 Linh hoạt</h4>
+                        <p>Dependency Injection, Middleware</p>
+                    </div>
+                </div>
+                
+                <h2>2. Tạo project ASP.NET Core Web API</h2>
+                <p>Đầu tiên, tạo một project mới:</p>
+                
+                <div class="code-block">
+                    <pre><code># Tạo project mới
+dotnet new webapi -n StudentManagementAPI
+
+# Di chuyển vào thư mục project
+cd StudentManagementAPI
+
+# Thêm các package cần thiết
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Swashbuckle.AspNetCore</code></pre>
+                </div>
+                
+                <h2>3. Cấu trúc project cơ bản</h2>
+                <p>Dưới đây là cấu trúc thư mục của project:</p>
+                
+                <div class="code-block">
+                    <pre><code>StudentManagementAPI/
+├── Controllers/
+│   └── StudentsController.cs
+├── Models/
+│   ├── Student.cs
+│   └── StudentDto.cs
+├── Data/
+│   └── ApplicationDbContext.cs
+├── Services/
+│   └── IStudentService.cs
+├── Program.cs
+└── appsettings.json</code></pre>
+                </div>
+                
+                <h2>4. Tạo Model và DTO</h2>
+                <h3>4.1. Student Model</h3>
+                <div class="code-block">
+                    <pre><code>public class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public DateTime DateOfBirth { get; set; }
+    public string Major { get; set; } = string.Empty;
+    public double GPA { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
+}</code></pre>
+                </div>
+                
+                <h3>4.2. Student DTO</h3>
+                <div class="code-block">
+                    <pre><code>public class StudentDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public DateTime DateOfBirth { get; set; }
+    public string Major { get; set; } = string.Empty;
+    public double GPA { get; set; }
+}
+
+public class CreateStudentDto
+{
+    [Required]
+    [StringLength(100)]
+    public string Name { get; set; } = string.Empty;
+    
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; } = string.Empty;
+    
+    [Required]
+    public DateTime DateOfBirth { get; set; }
+    
+    [Required]
+    [StringLength(50)]
+    public string Major { get; set; } = string.Empty;
+    
+    [Range(0.0, 4.0)]
+    public double GPA { get; set; }
+}</code></pre>
+                </div>
+                
+                <h2>5. Cấu hình Entity Framework</h2>
+                <h3>5.1. ApplicationDbContext</h3>
+                <div class="code-block">
+                    <pre><code>public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+    }
+    
+    public DbSet<Student> Students { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        // Cấu hình Student entity
+        modelBuilder.Entity<Student>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Major).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.GPA).HasColumnType("decimal(3,2)");
+            
+            // Index cho email để tìm kiếm nhanh
+            entity.HasIndex(e => e.Email).IsUnique();
+        });
+    }
+}</code></pre>
+                </div>
+                
+                <h3>5.2. Cấu hình trong Program.cs</h3>
+                <div class="code-block">
+                    <pre><code>var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Entity Framework
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();</code></pre>
+                </div>
+                
+                <h2>6. Tạo Controller</h2>
+                <div class="code-block">
+                    <pre><code>[ApiController]
+[Route("api/[controller]")]
+public class StudentsController : ControllerBase
+{
+    private readonly ApplicationDbContext _context;
+    
+    public StudentsController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+    
+    // GET: api/students
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudents()
+    {
+        var students = await _context.Students
+            .Select(s => new StudentDto
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Email = s.Email,
+                DateOfBirth = s.DateOfBirth,
+                Major = s.Major,
+                GPA = s.GPA
+            })
+            .ToListAsync();
+            
+        return Ok(students);
+    }
+    
+    // GET: api/students/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<StudentDto>> GetStudent(int id)
+    {
+        var student = await _context.Students
+            .Where(s => s.Id == id)
+            .Select(s => new StudentDto
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Email = s.Email,
+                DateOfBirth = s.DateOfBirth,
+                Major = s.Major,
+                GPA = s.GPA
+            })
+            .FirstOrDefaultAsync();
+            
+        if (student == null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(student);
+    }
+    
+    // POST: api/students
+    [HttpPost]
+    public async Task<ActionResult<StudentDto>> CreateStudent(CreateStudentDto createStudentDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
+        var student = new Student
+        {
+            Name = createStudentDto.Name,
+            Email = createStudentDto.Email,
+            DateOfBirth = createStudentDto.DateOfBirth,
+            Major = createStudentDto.Major,
+            GPA = createStudentDto.GPA
+        };
+        
+        _context.Students.Add(student);
+        await _context.SaveChangesAsync();
+        
+        var studentDto = new StudentDto
+        {
+            Id = student.Id,
+            Name = student.Name,
+            Email = student.Email,
+            DateOfBirth = student.DateOfBirth,
+            Major = student.Major,
+            GPA = student.GPA
+        };
+        
+        return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, studentDto);
+    }
+    
+    // PUT: api/students/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateStudent(int id, CreateStudentDto updateStudentDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
+        var student = await _context.Students.FindAsync(id);
+        if (student == null)
+        {
+            return NotFound();
+        }
+        
+        student.Name = updateStudentDto.Name;
+        student.Email = updateStudentDto.Email;
+        student.DateOfBirth = updateStudentDto.DateOfBirth;
+        student.Major = updateStudentDto.Major;
+        student.GPA = updateStudentDto.GPA;
+        student.UpdatedAt = DateTime.Now;
+        
+        await _context.SaveChangesAsync();
+        
+        return NoContent();
+    }
+    
+    // DELETE: api/students/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteStudent(int id)
+    {
+        var student = await _context.Students.FindAsync(id);
+        if (student == null)
+        {
+            return NotFound();
+        }
+        
+        _context.Students.Remove(student);
+        await _context.SaveChangesAsync();
+        
+        return NoContent();
+    }
+}</code></pre>
+                </div>
+                
+                <h2>7. Cấu hình Swagger Documentation</h2>
+                <div class="code-block">
+                    <pre><code>// Trong Program.cs
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo 
+    { 
+        Title = "Student Management API", 
+        Version = "v1",
+        Description = "API để quản lý sinh viên",
+        Contact = new OpenApiContact
+        {
+            Name = "Trần Văn Vương",
+            Email = "tranvuongab23@gmail.com"
+        }
+    });
+    
+    // Include XML comments
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});</code></pre>
+                </div>
+                
+                <h2>8. Cấu hình Database</h2>
+                <h3>8.1. Connection String</h3>
+                <div class="code-block">
+                    <pre><code>// appsettings.json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=StudentManagementDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}</code></pre>
+                </div>
+                
+                <h3>8.2. Migration và Update Database</h3>
+                <div class="code-block">
+                    <pre><code># Tạo migration
+dotnet ef migrations add InitialCreate
+
+# Cập nhật database
+dotnet ef database update</code></pre>
+                </div>
+                
+                <h2>9. Testing API với Postman</h2>
+                <div class="api-endpoint">
+                    <h3>📡 Các endpoint chính:</h3>
+                    <ul>
+                        <li><strong>GET</strong> /api/students - Lấy danh sách tất cả sinh viên</li>
+                        <li><strong>GET</strong> /api/students/{id} - Lấy thông tin sinh viên theo ID</li>
+                        <li><strong>POST</strong> /api/students - Tạo sinh viên mới</li>
+                        <li><strong>PUT</strong> /api/students/{id} - Cập nhật thông tin sinh viên</li>
+                        <li><strong>DELETE</strong> /api/students/{id} - Xóa sinh viên</li>
+                    </ul>
+                </div>
+                
+                <h2>10. Error Handling và Validation</h2>
+                <div class="code-block">
+                    <pre><code>// Global Exception Handler
+public class GlobalExceptionMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly ILogger<GlobalExceptionMiddleware> _logger;
+    
+    public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+    }
+    
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An unhandled exception occurred");
+            await HandleExceptionAsync(context, ex);
+        }
+    }
+    
+    private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = 500;
+        
+        var response = new
+        {
+            error = "Internal Server Error",
+            message = exception.Message,
+            timestamp = DateTime.UtcNow
+        };
+        
+        await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+    }
+}</code></pre>
+                </div>
+                
+                <h2>11. Kết luận</h2>
+                <p>ASP.NET Core Web API cung cấp một nền tảng mạnh mẽ và linh hoạt để xây dựng các dịch vụ web hiện đại. Với các tính năng như Entity Framework, Swagger documentation, và middleware pipeline, bạn có thể tạo ra những API chất lượng cao một cách nhanh chóng.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Bài tập thực hành:</strong>
+                    <ul>
+                        <li>Thêm authentication với JWT tokens</li>
+                        <li>Implement pagination cho danh sách sinh viên</li>
+                        <li>Tạo API để tìm kiếm sinh viên theo tên hoặc major</li>
+                        <li>Thêm logging và monitoring</li>
+                    </ul>
+                </div>
+                
+                <p>Trong bài viết tiếp theo, chúng ta sẽ tìm hiểu về cách tích hợp authentication và authorization vào Web API. Hãy theo dõi blog để không bỏ lỡ những kiến thức bổ ích!</p>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

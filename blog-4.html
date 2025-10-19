@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Kinh nghiệm thực tập tại công ty công nghệ | Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Blog Post Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffc107, #e0a800);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .blog-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .blog-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .experience-timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tip-card {
+            background: rgba(255, 107, 157, 0.1);
+            border: 1px solid var(--neon-pink);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .tip-card h4 {
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .skill-tag {
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="blog-post">
+            <header class="blog-header">
+                <div class="blog-category">Kinh nghiệm</div>
+                <h1 class="blog-title">Kinh nghiệm thực tập tại công ty công nghệ</h1>
+                <div class="blog-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 01/01/2024</span>
+                    <span>⏱️ 6 phút đọc</span>
+                    <span>👁️ 2,100 lượt xem</span>
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                <p>Thực tập là bước quan trọng trong hành trình học tập của sinh viên CNTT. Trong bài viết này, tôi sẽ chia sẻ kinh nghiệm thực tập tại công ty công nghệ, từ cách chuẩn bị CV, phỏng vấn đến những kỹ năng cần thiết để thành công.</p>
+                
+                <h2>1. Chuẩn bị trước khi thực tập</h2>
+                <p>Việc chuẩn bị kỹ lưỡng trước khi thực tập sẽ giúp bạn có cơ hội tốt hơn và tự tin hơn trong quá trình làm việc.</p>
+                
+                <div class="highlight-box">
+                    <strong>📋 Checklist chuẩn bị:</strong>
+                    <ul>
+                        <li>Hoàn thiện CV và portfolio</li>
+                        <li>Nâng cao kỹ năng lập trình</li>
+                        <li>Học thêm về Git, Docker, API</li>
+                        <li>Chuẩn bị tinh thần học hỏi</li>
+                    </ul>
+                </div>
+                
+                <h2>2. Quá trình tìm kiếm cơ hội thực tập</h2>
+                <div class="experience-timeline">
+                    <div class="timeline-item">
+                        <h3>📝 Bước 1: Chuẩn bị CV</h3>
+                        <p>CV là ấn tượng đầu tiên với nhà tuyển dụng. Hãy đảm bảo CV của bạn:</p>
+                        <ul>
+                            <li>Trình bày rõ ràng, dễ đọc</li>
+                            <li>Liệt kê các dự án đã làm</li>
+                            <li>Ghi rõ kỹ năng lập trình</li>
+                            <li>Đính kèm link GitHub, portfolio</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>🔍 Bước 2: Tìm kiếm cơ hội</h3>
+                        <p>Các kênh tìm kiếm hiệu quả:</p>
+                        <ul>
+                            <li>Website tuyển dụng: TopCV, VietnamWorks</li>
+                            <li>Mạng xã hội: LinkedIn, Facebook groups</li>
+                            <li>Career fair tại trường</li>
+                            <li>Giới thiệu từ thầy cô, bạn bè</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>💼 Bước 3: Phỏng vấn</h3>
+                        <p>Chuẩn bị kỹ cho buổi phỏng vấn:</p>
+                        <ul>
+                            <li>Nghiên cứu về công ty</li>
+                            <li>Chuẩn bị câu hỏi về dự án</li>
+                            <li>Thực hành coding interview</li>
+                            <li>Thể hiện tinh thần học hỏi</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>3. Kinh nghiệm thực tập thực tế</h2>
+                <h3>3.1. Tuần đầu tiên</h3>
+                <p>Tuần đầu tiên thường là khoảng thời gian khó khăn nhất. Bạn sẽ phải:</p>
+                <ul>
+                    <li>Làm quen với môi trường làm việc</li>
+                    <li>Học về quy trình phát triển phần mềm</li>
+                    <li>Làm quen với codebase của công ty</li>
+                    <li>Gặp gỡ team members</li>
+                </ul>
+                
+                <h3>3.2. Công việc hàng ngày</h3>
+                <p>Trong quá trình thực tập, tôi đã tham gia vào:</p>
+                <ul>
+                    <li>Phát triển tính năng mới cho ứng dụng web</li>
+                    <li>Fix bugs và cải thiện hiệu suất</li>
+                    <li>Code review với senior developers</li>
+                    <li>Tham gia daily standup meetings</li>
+                </ul>
+                
+                <h2>4. Kỹ năng cần thiết</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>💻 Kỹ năng kỹ thuật</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">ASP.NET Core</span>
+                            <span class="skill-tag">SQL Server</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>🤝 Kỹ năng mềm</h4>
+                        <ul>
+                            <li>Giao tiếp hiệu quả</li>
+                            <li>Làm việc nhóm</li>
+                            <li>Quản lý thời gian</li>
+                            <li>Học hỏi nhanh</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>📚 Kỹ năng học tập</h4>
+                        <ul>
+                            <li>Đọc và hiểu documentation</li>
+                            <li>Tìm kiếm thông tin trên Google</li>
+                            <li>Hỏi đúng câu hỏi</li>
+                            <li>Ghi chép và tổng hợp</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>5. Những thách thức gặp phải</h2>
+                <h3>5.1. Khó khăn về kỹ thuật</h3>
+                <p>Là sinh viên, tôi gặp nhiều khó khăn khi:</p>
+                <ul>
+                    <li>Hiểu codebase phức tạp của công ty</li>
+                    <li>Làm việc với các framework mới</li>
+                    <li>Debug các lỗi khó hiểu</li>
+                    <li>Optimize hiệu suất ứng dụng</li>
+                </ul>
+                
+                <h3>5.2. Áp lực công việc</h3>
+                <p>Môi trường làm việc thực tế khác hoàn toàn với việc học:</p>
+                <ul>
+                    <li>Deadline nghiêm ngặt</li>
+                    <li>Code quality cao</li>
+                    <li>Làm việc với team lớn</li>
+                    <li>Responsibility cho sản phẩm thực tế</li>
+                </ul>
+                
+                <h2>6. Cách vượt qua khó khăn</h2>
+                <div class="highlight-box">
+                    <strong>💡 Bí quyết thành công:</strong>
+                    <ul>
+                        <li><strong>Hỏi nhiều:</strong> Đừng ngại hỏi khi không hiểu</li>
+                        <li><strong>Học liên tục:</strong> Dành thời gian học thêm sau giờ làm</li>
+                        <li><strong>Ghi chép:</strong> Viết lại những gì đã học</li>
+                        <li><strong>Thực hành:</strong> Làm thêm project cá nhân</li>
+                        <li><strong>Kết nối:</strong> Xây dựng mối quan hệ với đồng nghiệp</li>
+                    </ul>
+                </div>
+                
+                <h2>7. Những điều học được</h2>
+                <h3>7.1. Kỹ năng kỹ thuật</h3>
+                <ul>
+                    <li>Làm việc với Git workflow chuyên nghiệp</li>
+                    <li>Code review và best practices</li>
+                    <li>Testing và debugging hiệu quả</li>
+                    <li>Deployment và DevOps cơ bản</li>
+                </ul>
+                
+                <h3>7.2. Kỹ năng làm việc</h3>
+                <ul>
+                    <li>Agile/Scrum methodology</li>
+                    <li>Communication trong team</li>
+                    <li>Problem solving approach</li>
+                    <li>Time management</li>
+                </ul>
+                
+                <h2>8. Lời khuyên cho sinh viên</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>🎯 Trước khi thực tập</h4>
+                        <ul>
+                            <li>Xây dựng portfolio cá nhân</li>
+                            <li>Học Git và GitHub</li>
+                            <li>Làm quen với IDE chuyên nghiệp</li>
+                            <li>Đọc về software development process</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>🚀 Trong quá trình thực tập</h4>
+                        <ul>
+                            <li>Chủ động học hỏi</li>
+                            <li>Tham gia tích cực vào dự án</li>
+                            <li>Ghi chép mọi thứ</li>
+                            <li>Xây dựng network</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>📈 Sau khi thực tập</h4>
+                        <ul>
+                            <li>Tổng kết kinh nghiệm</li>
+                            <li>Cập nhật CV và portfolio</li>
+                            <li>Giữ liên lạc với đồng nghiệp</li>
+                            <li>Chuẩn bị cho cơ hội tiếp theo</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>9. Tác động đến sự nghiệp</h2>
+                <p>Kinh nghiệm thực tập đã giúp tôi:</p>
+                <ul>
+                    <li>Hiểu rõ hơn về ngành công nghiệp phần mềm</li>
+                    <li>Phát triển kỹ năng thực tế</li>
+                    <li>Xây dựng network chuyên nghiệp</li>
+                    <li>Định hướng rõ ràng cho sự nghiệp</li>
+                </ul>
+                
+                <h2>10. Kết luận</h2>
+                <p>Thực tập là cơ hội tuyệt vời để sinh viên CNTT trải nghiệm môi trường làm việc thực tế. Mặc dù có nhiều thách thức, nhưng đây là bước quan trọng để phát triển kỹ năng và định hướng nghề nghiệp.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Lời khuyên cuối cùng:</strong>
+                    <p>Hãy tận dụng tối đa cơ hội thực tập. Đừng ngại hỏi, đừng ngại thử thách bản thân. Mỗi ngày là một cơ hội học hỏi mới. Hãy làm việc chăm chỉ, học hỏi tích cực và xây dựng mối quan hệ tốt với đồng nghiệp. Thành công sẽ đến với những ai biết nắm bắt cơ hội!</p>
+                </div>
+                
+                <p>Nếu bạn có câu hỏi về kinh nghiệm thực tập hoặc muốn chia sẻ câu chuyện của mình, hãy để lại comment bên dưới nhé!</p>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

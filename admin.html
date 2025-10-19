@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản lý Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            color: #f0f6fc;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(188, 140, 255, 0.3);
+        }
+
+        .admin-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #bc8cff, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .admin-header p {
+            color: #8b949e;
+            font-size: 1.1rem;
+        }
+
+        .admin-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid rgba(188, 140, 255, 0.3);
+            color: #f0f6fc;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(188, 140, 255, 0.2);
+            border-color: #bc8cff;
+            transform: translateY(-2px);
+        }
+
+        .admin-section {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(188, 140, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #bc8cff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-upload {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .upload-area {
+            flex: 1;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 20px;
+            border: 2px dashed rgba(188, 140, 255, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(188, 140, 255, 0.05);
+        }
+
+        .file-input-label:hover {
+            border-color: #bc8cff;
+            background: rgba(188, 140, 255, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            color: #8b949e;
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #6e7681;
+            margin-top: 5px;
+        }
+
+        .preview-area {
+            flex: 1;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #f0f6fc;
+        }
+
+        .avatar-preview {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid rgba(188, 140, 255, 0.3);
+            object-fit: cover;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #8b949e;
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #bc8cff, #ff6b9d);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(108, 117, 125, 0.2);
+            color: #f0f6fc;
+            border: 1px solid rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+        }
+
+        .current-avatar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .current-avatar h3 {
+            margin-bottom: 15px;
+            color: #f0f6fc;
+        }
+
+        .avatar-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .avatar-info p {
+            margin: 5px 0;
+            color: #8b949e;
+        }
+
+        .success-message {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #28a745;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .back-to-blog {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-to-blog a {
+            color: #bc8cff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-to-blog a:hover {
+            color: #ff6b9d;
+        }
+
+        /* Content Management Styles */
+        .content-subsection {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(188, 140, 255, 0.1);
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #bc8cff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #f0f6fc;
+        }
+
+        .form-control {
+            padding: 12px;
+            border: 1px solid rgba(188, 140, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #f0f6fc;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #bc8cff;
+            box-shadow: 0 0 10px rgba(188, 140, 255, 0.3);
+        }
+
+        .form-control::placeholder {
+            color: #6e7681;
+        }
+
+        /* Skills Editor */
+        .skills-editor {
+            margin-bottom: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+
+        .skill-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .skill-name {
+            flex: 2;
+        }
+
+        .skill-percentage {
+            flex: 1;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        /* Data Actions */
+        .data-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .data-actions .btn {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        /* Posts and Projects List Styles */
+        .posts-list, .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .post-item, .project-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(188, 140, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-info, .project-info {
+            flex: 1;
+        }
+
+        .post-title, .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 5px;
+        }
+
+        .post-meta, .project-meta {
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        .post-actions, .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete {
+            background: linear-gradient(45deg, #dc3545, #e83e8c);
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .avatar-upload {
+                flex-direction: column;
+            }
+            
+            .admin-container {
+                padding: 10px;
+            }
+            
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skill-inputs {
+                flex-direction: column;
+            }
+
+            .data-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>🔧 Admin Panel</h1>
+            <p>Quản lý nội dung blog cá nhân</p>
+            </div>
+
+        <div class="admin-nav">
+            <button class="nav-btn active" onclick="showSection('avatar')">🖼️ Ảnh đại diện</button>
+            <button class="nav-btn" onclick="showSection('content')">📝 Nội dung</button>
+            <button class="nav-btn" onclick="showSection('posts')">📰 Bài viết</button>
+            <button class="nav-btn" onclick="showSection('projects')">💼 Dự án</button>
+            <button class="nav-btn" onclick="showSection('settings')">⚙️ Cài đặt</button>
+                </div>
+
+        <!-- Avatar Management Section -->
+        <div id="avatar-section" class="admin-section">
+            <h2 class="section-title">🖼️ Quản lý ảnh đại diện</h2>
+            
+            <div id="success-message" class="success-message">
+                ✅ Ảnh đại diện đã được cập nhật thành công!
+                </div>
+            
+            <div id="error-message" class="error-message">
+                ❌ Có lỗi xảy ra khi cập nhật ảnh đại diện!
+                </div>
+
+            <div class="avatar-upload">
+                <div class="upload-area">
+                    <h3>📤 Upload ảnh mới</h3>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="avatar-input" class="file-input" accept="image/*">
+                        <label for="avatar-input" class="file-input-label">
+                            <span class="upload-icon">📁</span>
+                            <div class="upload-text">Chọn ảnh đại diện</div>
+                            <div class="upload-hint">Hỗ trợ: JPG, PNG, GIF (Tối đa 5MB)</div>
+                        </label>
+                </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn btn-primary" onclick="uploadAvatar()">💾 Lưu ảnh</button>
+                        <button class="btn btn-secondary" onclick="clearPreview()">🗑️ Xóa</button>
+                </div>
+                    </div>
+
+                <div class="preview-area">
+                    <h3 class="preview-title">👁️ Xem trước</h3>
+                    <div class="avatar-preview" id="avatar-preview">
+                        <span>👨‍💻</span>
+                            </div>
+                    <div class="avatar-info" id="avatar-info" style="display: none;">
+                        <p><strong>Tên file:</strong> <span id="file-name"></span></p>
+                        <p><strong>Kích thước:</strong> <span id="file-size"></span></p>
+                        <p><strong>Loại file:</strong> <span id="file-type"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="current-avatar">
+                <h3>🖼️ Ảnh đại diện hiện tại</h3>
+                <div class="avatar-preview" id="current-avatar-preview">
+                    <span>👨‍💻</span>
+                            </div>
+                <div style="margin-top: 15px;">
+                    <button class="btn btn-danger" onclick="removeCurrentAvatar()">🗑️ Xóa ảnh hiện tại</button>
+                        </div>
+                    </div>
+                            </div>
+
+        <!-- Content Management Section -->
+        <div id="content-section" class="admin-section" style="display: none;">
+            <h2 class="section-title">📝 Quản lý nội dung</h2>
+            
+            <!-- Personal Information Editor -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">👤 Thông tin cá nhân</h3>
+                <div class="form-grid">
+                                    <div class="form-group">
+                        <label for="fullname" class="form-label">Họ và tên</label>
+                        <input type="text" id="fullname" class="form-control" placeholder="Nhập họ và tên">
+                                    </div>
+                                    <div class="form-group">
+                        <label for="birthday" class="form-label">Ngày sinh</label>
+                        <input type="date" id="birthday" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                        <label for="hometown" class="form-label">Quê quán</label>
+                        <input type="text" id="hometown" class="form-control" placeholder="Nhập quê quán">
+                                    </div>
+                                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Nhập email">
+                                    </div>
+                                    <div class="form-group">
+                        <label for="phone" class="form-label">Điện thoại</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Nhập số điện thoại">
+                                    </div>
+                                    <div class="form-group">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <textarea id="address" class="form-control" rows="3" placeholder="Nhập địa chỉ"></textarea>
+                                    </div>
+                                    </div>
+                <button class="btn btn-primary" onclick="savePersonalInfo()">💾 Lưu thông tin</button>
+                                    </div>
+
+            <!-- Education Editor -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">🎓 Thông tin học vấn</h3>
+                <div class="form-grid">
+                                <div class="form-group">
+                        <label for="university" class="form-label">Trường đại học</label>
+                        <input type="text" id="university" class="form-control" placeholder="Nhập tên trường">
+                                </div>
+                                <div class="form-group">
+                        <label for="major" class="form-label">Chuyên ngành</label>
+                        <input type="text" id="major" class="form-control" placeholder="Nhập chuyên ngành">
+                                </div>
+                                <div class="form-group">
+                        <label for="gpa" class="form-label">GPA</label>
+                        <input type="number" id="gpa" class="form-control" step="0.1" placeholder="Nhập GPA">
+                                </div>
+                                    <div class="form-group">
+                        <label for="start-year" class="form-label">Năm bắt đầu</label>
+                        <input type="number" id="start-year" class="form-control" placeholder="Năm bắt đầu">
+                                    </div>
+                                    <div class="form-group">
+                        <label for="end-year" class="form-label">Năm kết thúc</label>
+                        <input type="number" id="end-year" class="form-control" placeholder="Năm kết thúc">
+                                    </div>
+                                    </div>
+                <button class="btn btn-primary" onclick="saveEducationInfo()">💾 Lưu thông tin học vấn</button>
+                                </div>
+
+            <!-- Skills Editor -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">💻 Kỹ năng lập trình</h3>
+                <div class="skills-editor">
+                    <div class="skill-item">
+                        <div class="skill-inputs">
+                            <input type="text" placeholder="Tên kỹ năng" class="skill-name">
+                            <input type="number" placeholder="Phần trăm" class="skill-percentage" min="0" max="100">
+                            <button class="btn btn-danger btn-sm" onclick="removeSkill(this)">🗑️</button>
+                            </div>
+                                </div>
+                                </div>
+                <button class="btn btn-secondary" onclick="addSkill()">➕ Thêm kỹ năng</button>
+                <button class="btn btn-primary" onclick="saveSkills()">💾 Lưu kỹ năng</button>
+    </div>
+
+            <!-- Social Links Editor -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">🔗 Liên kết mạng xã hội</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="zalo-link" class="form-label">Zalo</label>
+                        <input type="url" id="zalo-link" class="form-control" placeholder="Nhập link Zalo">
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook-link" class="form-label">Facebook</label>
+                        <input type="url" id="facebook-link" class="form-control" placeholder="Nhập link Facebook">
+                    </div>
+                    <div class="form-group">
+                        <label for="github-link" class="form-label">GitHub</label>
+                        <input type="url" id="github-link" class="form-control" placeholder="Nhập link GitHub">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin-link" class="form-label">LinkedIn</label>
+                        <input type="url" id="linkedin-link" class="form-control" placeholder="Nhập link LinkedIn">
+                    </div>
+                    </div>
+                <button class="btn btn-primary" onclick="saveSocialLinks()">💾 Lưu liên kết</button>
+        </div>
+    </div>
+
+        <!-- Settings Section -->
+        <div id="settings-section" class="admin-section" style="display: none;">
+            <h2 class="section-title">⚙️ Cài đặt</h2>
+            
+            <!-- Blog Settings -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">📝 Cài đặt blog</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="blog-title" class="form-label">Tiêu đề blog</label>
+                        <input type="text" id="blog-title" class="form-control" placeholder="Nhập tiêu đề blog">
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-description" class="form-label">Mô tả blog</label>
+                        <textarea id="blog-description" class="form-control" rows="3" placeholder="Nhập mô tả blog"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-keywords" class="form-label">Từ khóa</label>
+                        <input type="text" id="blog-keywords" class="form-control" placeholder="Nhập từ khóa (cách nhau bởi dấu phẩy)">
+                    </div>
+                    </div>
+                <button class="btn btn-primary" onclick="saveBlogSettings()">💾 Lưu cài đặt blog</button>
+    </div>
+
+            <!-- Theme Settings -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">🎨 Cài đặt giao diện</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="theme-color" class="form-label">Màu chủ đạo</label>
+                        <input type="color" id="theme-color" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="font-size" class="form-label">Kích thước chữ</label>
+                        <select id="font-size" class="form-control">
+                            <option value="small">Nhỏ</option>
+                            <option value="medium" selected>Trung bình</option>
+                            <option value="large">Lớn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="animation-speed" class="form-label">Tốc độ animation</label>
+                        <select id="animation-speed" class="form-control">
+                            <option value="slow">Chậm</option>
+                            <option value="normal" selected>Bình thường</option>
+                            <option value="fast">Nhanh</option>
+                        </select>
+                    </div>
+            </div>
+                <button class="btn btn-primary" onclick="saveThemeSettings()">💾 Lưu cài đặt giao diện</button>
+            </div>
+
+            <!-- Data Management -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">💾 Quản lý dữ liệu</h3>
+                <div class="data-actions">
+                    <button class="btn btn-secondary" onclick="exportData()">📤 Xuất dữ liệu</button>
+                    <button class="btn btn-secondary" onclick="importData()">📥 Nhập dữ liệu</button>
+                    <button class="btn btn-danger" onclick="resetAllData()">🗑️ Xóa tất cả dữ liệu</button>
+            </div>
+                <input type="file" id="import-file" accept=".json" style="display: none;" onchange="handleImportFile(this)">
+        </div>
+    </div>
+
+        <!-- Posts Management Section -->
+        <div id="posts-section" class="admin-section" style="display: none;">
+            <h2 class="section-title">📰 Quản lý bài viết</h2>
+            
+            <!-- Add New Post -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">➕ Thêm bài viết mới</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="post-title" class="form-label">Tiêu đề bài viết</label>
+                        <input type="text" id="post-title" class="form-control" placeholder="Nhập tiêu đề bài viết">
+            </div>
+                    <div class="form-group">
+                        <label for="post-category" class="form-label">Danh mục</label>
+                        <input type="text" id="post-category" class="form-control" placeholder="Nhập danh mục">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-excerpt" class="form-label">Mô tả ngắn</label>
+                        <textarea id="post-excerpt" class="form-control" rows="3" placeholder="Nhập mô tả ngắn"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-date" class="form-label">Ngày đăng</label>
+                        <input type="date" id="post-date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-read-time" class="form-label">Thời gian đọc (phút)</label>
+                        <input type="number" id="post-read-time" class="form-control" placeholder="Nhập thời gian đọc">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-views" class="form-label">Lượt xem</label>
+                        <input type="number" id="post-views" class="form-control" placeholder="Nhập số lượt xem">
+                    </div>
+            </div>
+                <button class="btn btn-primary" onclick="addPost()">💾 Thêm bài viết</button>
+            </div>
+
+            <!-- Posts List -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">📋 Danh sách bài viết</h3>
+                <div id="posts-list" class="posts-list">
+                    <!-- Posts will be loaded here -->
+        </div>
+    </div>
+            </div>
+
+        <!-- Projects Management Section -->
+        <div id="projects-section" class="admin-section" style="display: none;">
+            <h2 class="section-title">💼 Quản lý dự án</h2>
+            
+            <!-- Add New Project -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">➕ Thêm dự án mới</h3>
+                <div class="form-grid">
+                        <div class="form-group">
+                        <label for="project-title" class="form-label">Tên dự án</label>
+                        <input type="text" id="project-title" class="form-control" placeholder="Nhập tên dự án">
+                        </div>
+                        <div class="form-group">
+                        <label for="project-description" class="form-label">Mô tả dự án</label>
+                        <textarea id="project-description" class="form-control" rows="3" placeholder="Nhập mô tả dự án"></textarea>
+                        </div>
+                        <div class="form-group">
+                        <label for="project-technologies" class="form-label">Công nghệ sử dụng</label>
+                        <input type="text" id="project-technologies" class="form-control" placeholder="Nhập công nghệ (cách nhau bởi dấu phẩy)">
+                        </div>
+                        <div class="form-group">
+                        <label for="project-link" class="form-label">Link dự án</label>
+                        <input type="url" id="project-link" class="form-control" placeholder="Nhập link dự án">
+                        </div>
+                        </div>
+                <button class="btn btn-primary" onclick="addProject()">💾 Thêm dự án</button>
+                        </div>
+
+            <!-- Projects List -->
+            <div class="content-subsection">
+                <h3 class="subsection-title">📋 Danh sách dự án</h3>
+                <div id="projects-list" class="projects-list">
+                    <!-- Projects will be loaded here -->
+                    </div>
+            </div>
+            </div>
+
+        <div class="back-to-blog">
+            <a href="index.html">← Quay lại trang chủ</a>
+        </div>
+    </div>
+
+    <script>
+        let selectedFile = null;
+
+        // Show different sections
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(section + '-section').style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // File input change handler
+        document.getElementById('avatar-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFile = file;
+                previewAvatar(file);
+            }
+        });
+
+        // Preview avatar function
+        function previewAvatar(file) {
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('avatar-preview');
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                    
+                    // Show file info
+                    document.getElementById('file-name').textContent = file.name;
+                    document.getElementById('file-size').textContent = formatFileSize(file.size);
+                    document.getElementById('file-type').textContent = file.type;
+                    document.getElementById('avatar-info').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Upload avatar function
+        function uploadAvatar() {
+            if (!selectedFile) {
+                showError('Vui lòng chọn một file ảnh!');
+                return;
+            }
+
+            // Validate file size (5MB max)
+            if (selectedFile.size > 5 * 1024 * 1024) {
+                showError('File quá lớn! Vui lòng chọn file nhỏ hơn 5MB.');
+                return;
+            }
+
+            // Validate file type
+            if (!selectedFile.type.startsWith('image/')) {
+                showError('Vui lòng chọn file ảnh hợp lệ!');
+                return;
+            }
+
+            // Convert to base64 and save to localStorage
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    localStorage.setItem('userAvatar', e.target.result);
+                    localStorage.setItem('avatarFileName', selectedFile.name);
+                    localStorage.setItem('avatarFileSize', selectedFile.size);
+                    localStorage.setItem('avatarFileType', selectedFile.type);
+                    
+                    // Update current avatar preview
+                    updateCurrentAvatarPreview();
+                    
+                    showSuccess('Ảnh đại diện đã được cập nhật thành công!');
+                    
+                    // Clear form
+                    document.getElementById('avatar-input').value = '';
+                    selectedFile = null;
+                    clearPreview();
+                } catch (error) {
+                    showError('Có lỗi xảy ra khi lưu ảnh: ' + error.message);
+                }
+            };
+            reader.readAsDataURL(selectedFile);
+        }
+
+        // Clear preview
+        function clearPreview() {
+            document.getElementById('avatar-preview').innerHTML = '<span>👨‍💻</span>';
+            document.getElementById('avatar-info').style.display = 'none';
+            document.getElementById('avatar-input').value = '';
+            selectedFile = null;
+        }
+
+        // Remove current avatar
+        function removeCurrentAvatar() {
+            if (confirm('Bạn có chắc chắn muốn xóa ảnh đại diện hiện tại?')) {
+                localStorage.removeItem('userAvatar');
+                localStorage.removeItem('avatarFileName');
+                localStorage.removeItem('avatarFileSize');
+                localStorage.removeItem('avatarFileType');
+                updateCurrentAvatarPreview();
+                showSuccess('Ảnh đại diện đã được xóa!');
+            }
+        }
+
+        // Update current avatar preview
+        function updateCurrentAvatarPreview() {
+            const currentAvatar = localStorage.getItem('userAvatar');
+            const preview = document.getElementById('current-avatar-preview');
+            
+            if (currentAvatar) {
+                preview.innerHTML = `<img src="${currentAvatar}" alt="Current Avatar">`;
+        } else {
+                preview.innerHTML = '<span>👨‍💻</span>';
+            }
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = '✅ ' + message;
+            successDiv.style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+            
+                setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = '❌ ' + message;
+            errorDiv.style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Content Management Functions
+        function savePersonalInfo() {
+            const personalInfo = {
+                fullname: document.getElementById('fullname').value,
+                birthday: document.getElementById('birthday').value,
+                hometown: document.getElementById('hometown').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value
+            };
+            
+            localStorage.setItem('personalInfo', JSON.stringify(personalInfo));
+            showSuccess('Thông tin cá nhân đã được lưu!');
+        }
+
+        function saveEducationInfo() {
+            const educationInfo = {
+                university: document.getElementById('university').value,
+                major: document.getElementById('major').value,
+                gpa: document.getElementById('gpa').value,
+                startYear: document.getElementById('start-year').value,
+                endYear: document.getElementById('end-year').value
+            };
+            
+            localStorage.setItem('educationInfo', JSON.stringify(educationInfo));
+            showSuccess('Thông tin học vấn đã được lưu!');
+        }
+
+        function addSkill() {
+            const skillsEditor = document.querySelector('.skills-editor');
+            const skillItem = document.createElement('div');
+            skillItem.className = 'skill-item';
+            skillItem.innerHTML = `
+                <div class="skill-inputs">
+                    <input type="text" placeholder="Tên kỹ năng" class="skill-name">
+                    <input type="number" placeholder="Phần trăm" class="skill-percentage" min="0" max="100">
+                    <button class="btn btn-danger btn-sm" onclick="removeSkill(this)">🗑️</button>
+                </div>
+            `;
+            skillsEditor.appendChild(skillItem);
+        }
+
+        function removeSkill(button) {
+            button.closest('.skill-item').remove();
+        }
+
+        function saveSkills() {
+            const skillItems = document.querySelectorAll('.skill-item');
+            const skills = [];
+            
+            skillItems.forEach(item => {
+                const name = item.querySelector('.skill-name').value;
+                const percentage = item.querySelector('.skill-percentage').value;
+                
+                if (name && percentage) {
+                    skills.push({ name, percentage: parseInt(percentage) });
+                }
+            });
+            
+            localStorage.setItem('skills', JSON.stringify(skills));
+            showSuccess('Kỹ năng đã được lưu!');
+        }
+
+        function saveSocialLinks() {
+            const socialLinks = {
+                zalo: document.getElementById('zalo-link').value,
+                facebook: document.getElementById('facebook-link').value,
+                github: document.getElementById('github-link').value,
+                linkedin: document.getElementById('linkedin-link').value
+            };
+            
+            localStorage.setItem('socialLinks', JSON.stringify(socialLinks));
+            showSuccess('Liên kết mạng xã hội đã được lưu!');
+        }
+
+        function saveBlogSettings() {
+            const blogSettings = {
+                title: document.getElementById('blog-title').value,
+                description: document.getElementById('blog-description').value,
+                keywords: document.getElementById('blog-keywords').value
+            };
+            
+            localStorage.setItem('blogSettings', JSON.stringify(blogSettings));
+            showSuccess('Cài đặt blog đã được lưu!');
+        }
+
+        function saveThemeSettings() {
+            const themeSettings = {
+                color: document.getElementById('theme-color').value,
+                fontSize: document.getElementById('font-size').value,
+                animationSpeed: document.getElementById('animation-speed').value
+            };
+            
+            localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
+            showSuccess('Cài đặt giao diện đã được lưu!');
+        }
+
+        function exportData() {
+            const allData = {
+                personalInfo: localStorage.getItem('personalInfo'),
+                educationInfo: localStorage.getItem('educationInfo'),
+                skills: localStorage.getItem('skills'),
+                socialLinks: localStorage.getItem('socialLinks'),
+                blogSettings: localStorage.getItem('blogSettings'),
+                themeSettings: localStorage.getItem('themeSettings'),
+                userAvatar: localStorage.getItem('userAvatar')
+            };
+            
+            const dataStr = JSON.stringify(allData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'blog-data.json';
+            link.click();
+            
+            showSuccess('Dữ liệu đã được xuất thành công!');
+        }
+
+        function importData() {
+            document.getElementById('import-file').click();
+        }
+
+        function handleImportFile(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        
+                        // Import all data
+                        Object.keys(data).forEach(key => {
+                            if (data[key]) {
+                                localStorage.setItem(key, data[key]);
+                            }
+                        });
+                        
+                        showSuccess('Dữ liệu đã được nhập thành công!');
+                        loadAllData();
+                    } catch (error) {
+                        showError('File không hợp lệ: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function resetAllData() {
+            if (confirm('Bạn có chắc chắn muốn xóa tất cả dữ liệu? Hành động này không thể hoàn tác!')) {
+                localStorage.clear();
+                showSuccess('Tất cả dữ liệu đã được xóa!');
+                loadAllData();
+            }
+        }
+
+        function loadAllData() {
+            // Load personal info
+            const personalInfo = JSON.parse(localStorage.getItem('personalInfo') || '{}');
+            if (personalInfo.fullname) document.getElementById('fullname').value = personalInfo.fullname;
+            if (personalInfo.birthday) document.getElementById('birthday').value = personalInfo.birthday;
+            if (personalInfo.hometown) document.getElementById('hometown').value = personalInfo.hometown;
+            if (personalInfo.email) document.getElementById('email').value = personalInfo.email;
+            if (personalInfo.phone) document.getElementById('phone').value = personalInfo.phone;
+            if (personalInfo.address) document.getElementById('address').value = personalInfo.address;
+
+            // Load education info
+            const educationInfo = JSON.parse(localStorage.getItem('educationInfo') || '{}');
+            if (educationInfo.university) document.getElementById('university').value = educationInfo.university;
+            if (educationInfo.major) document.getElementById('major').value = educationInfo.major;
+            if (educationInfo.gpa) document.getElementById('gpa').value = educationInfo.gpa;
+            if (educationInfo.startYear) document.getElementById('start-year').value = educationInfo.startYear;
+            if (educationInfo.endYear) document.getElementById('end-year').value = educationInfo.endYear;
+
+            // Load skills
+            const skills = JSON.parse(localStorage.getItem('skills') || '[]');
+            const skillsEditor = document.querySelector('.skills-editor');
+            skillsEditor.innerHTML = '';
+            skills.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `
+                    <div class="skill-inputs">
+                        <input type="text" placeholder="Tên kỹ năng" class="skill-name" value="${skill.name}">
+                        <input type="number" placeholder="Phần trăm" class="skill-percentage" min="0" max="100" value="${skill.percentage}">
+                        <button class="btn btn-danger btn-sm" onclick="removeSkill(this)">🗑️</button>
+                    </div>
+                `;
+                skillsEditor.appendChild(skillItem);
+            });
+
+            // Load social links
+            const socialLinks = JSON.parse(localStorage.getItem('socialLinks') || '{}');
+            if (socialLinks.zalo) document.getElementById('zalo-link').value = socialLinks.zalo;
+            if (socialLinks.facebook) document.getElementById('facebook-link').value = socialLinks.facebook;
+            if (socialLinks.github) document.getElementById('github-link').value = socialLinks.github;
+            if (socialLinks.linkedin) document.getElementById('linkedin-link').value = socialLinks.linkedin;
+
+            // Load blog settings
+            const blogSettings = JSON.parse(localStorage.getItem('blogSettings') || '{}');
+            if (blogSettings.title) document.getElementById('blog-title').value = blogSettings.title;
+            if (blogSettings.description) document.getElementById('blog-description').value = blogSettings.description;
+            if (blogSettings.keywords) document.getElementById('blog-keywords').value = blogSettings.keywords;
+
+            // Load theme settings
+            const themeSettings = JSON.parse(localStorage.getItem('themeSettings') || '{}');
+            if (themeSettings.color) document.getElementById('theme-color').value = themeSettings.color;
+            if (themeSettings.fontSize) document.getElementById('font-size').value = themeSettings.fontSize;
+            if (themeSettings.animationSpeed) document.getElementById('animation-speed').value = themeSettings.animationSpeed;
+        }
+
+        // Posts Management Functions
+        function addPost() {
+            const post = {
+                id: Date.now(),
+                title: document.getElementById('post-title').value,
+                category: document.getElementById('post-category').value,
+                excerpt: document.getElementById('post-excerpt').value,
+                date: document.getElementById('post-date').value,
+                readTime: document.getElementById('post-read-time').value,
+                views: document.getElementById('post-views').value
+            };
+
+            if (!post.title || !post.category) {
+                showError('Vui lòng nhập tiêu đề và danh mục!');
+                return;
+            }
+
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            posts.push(post);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            
+            loadPosts();
+            clearPostForm();
+            showSuccess('Bài viết đã được thêm thành công!');
+        }
+
+        function editPost(id) {
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            const post = posts.find(p => p.id === id);
+            
+            if (post) {
+                document.getElementById('post-title').value = post.title;
+                document.getElementById('post-category').value = post.category;
+                document.getElementById('post-excerpt').value = post.excerpt;
+                document.getElementById('post-date').value = post.date;
+                document.getElementById('post-read-time').value = post.readTime;
+                document.getElementById('post-views').value = post.views;
+                
+                // Remove the post from list
+                const updatedPosts = posts.filter(p => p.id !== id);
+                localStorage.setItem('posts', JSON.stringify(updatedPosts));
+                loadPosts();
+            }
+        }
+
+        function deletePost(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
+                const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+                const updatedPosts = posts.filter(p => p.id !== id);
+                localStorage.setItem('posts', JSON.stringify(updatedPosts));
+                loadPosts();
+                showSuccess('Bài viết đã được xóa!');
+            }
+        }
+
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            const postsList = document.getElementById('posts-list');
+            
+            if (posts.length === 0) {
+                postsList.innerHTML = '<p style="color: #8b949e; text-align: center;">Chưa có bài viết nào</p>';
+                return;
+            }
+
+            postsList.innerHTML = posts.map(post => `
+                <div class="post-item">
+                    <div class="post-info">
+                        <div class="post-title">${post.title}</div>
+                        <div class="post-meta">
+                            📅 ${post.date} | 🏷️ ${post.category} | ⏱️ ${post.readTime} phút | 👁️ ${post.views} lượt xem
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <button class="btn btn-edit" onclick="editPost(${post.id})">✏️ Sửa</button>
+                        <button class="btn btn-delete" onclick="deletePost(${post.id})">🗑️ Xóa</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearPostForm() {
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-category').value = '';
+            document.getElementById('post-excerpt').value = '';
+            document.getElementById('post-date').value = '';
+            document.getElementById('post-read-time').value = '';
+            document.getElementById('post-views').value = '';
+        }
+
+        // Projects Management Functions
+        function addProject() {
+            const project = {
+                id: Date.now(),
+                title: document.getElementById('project-title').value,
+                description: document.getElementById('project-description').value,
+                technologies: document.getElementById('project-technologies').value,
+                link: document.getElementById('project-link').value
+            };
+
+            if (!project.title || !project.description) {
+                showError('Vui lòng nhập tên dự án và mô tả!');
+                return;
+            }
+
+            const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+            projects.push(project);
+            localStorage.setItem('projects', JSON.stringify(projects));
+            
+            loadProjects();
+            clearProjectForm();
+            showSuccess('Dự án đã được thêm thành công!');
+        }
+
+        function editProject(id) {
+            const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+            const project = projects.find(p => p.id === id);
+            
+            if (project) {
+                document.getElementById('project-title').value = project.title;
+                document.getElementById('project-description').value = project.description;
+                document.getElementById('project-technologies').value = project.technologies;
+                document.getElementById('project-link').value = project.link;
+                
+                // Remove the project from list
+                const updatedProjects = projects.filter(p => p.id !== id);
+                localStorage.setItem('projects', JSON.stringify(updatedProjects));
+                loadProjects();
+            }
+        }
+
+        function deleteProject(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa dự án này?')) {
+                const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+                const updatedProjects = projects.filter(p => p.id !== id);
+                localStorage.setItem('projects', JSON.stringify(updatedProjects));
+                loadProjects();
+                showSuccess('Dự án đã được xóa!');
+            }
+        }
+
+        function loadProjects() {
+            const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+            const projectsList = document.getElementById('projects-list');
+            
+            if (projects.length === 0) {
+                projectsList.innerHTML = '<p style="color: #8b949e; text-align: center;">Chưa có dự án nào</p>';
+                return;
+            }
+
+            projectsList.innerHTML = projects.map(project => `
+                <div class="project-item">
+                    <div class="project-info">
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-meta">
+                            🔧 ${project.technologies} | 🔗 ${project.link || 'Chưa có link'}
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <button class="btn btn-edit" onclick="editProject(${project.id})">✏️ Sửa</button>
+                        <button class="btn btn-delete" onclick="deleteProject(${project.id})">🗑️ Xóa</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearProjectForm() {
+            document.getElementById('project-title').value = '';
+            document.getElementById('project-description').value = '';
+            document.getElementById('project-technologies').value = '';
+            document.getElementById('project-link').value = '';
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentAvatarPreview();
+            loadAllData();
+            loadPosts();
+            loadProjects();
+        });
+    </script>
+</body>
+</html>

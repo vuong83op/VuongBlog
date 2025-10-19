@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hệ thống quản lý thư viện | Dự án tiêu biểu - Blog Cá Nhân HUTECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Project Page Styles */
+        body {
+            background: linear-gradient(-45deg, #010409, #0d1117, #161b22, #21262d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #f0f6fc;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .project-page {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            border: 1px solid #bc8cff;
+            box-shadow: 0 0 20px rgba(188, 140, 255, 0.3);
+        }
+        
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(188, 140, 255, 0.3);
+        }
+        
+        .project-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .project-content {
+            line-height: 1.8;
+            color: #f0f6fc;
+        }
+        
+        .project-content h2 {
+            color: #bc8cff;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #bc8cff;
+            padding-left: 1rem;
+        }
+        
+        .project-content h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .project-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .feature-card h4 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: rgba(188, 140, 255, 0.1);
+            border: 1px solid #bc8cff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: 1px solid #bc8cff;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.3);
+        }
+        
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .gallery-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .challenge {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .solution {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">
+            ← Quay lại trang chủ
+        </a>
+        
+        <article class="project-page">
+            <header class="project-header">
+                <div class="project-category">Dự án Web Application</div>
+                <h1 class="project-title">Hệ thống quản lý thư viện</h1>
+                <p class="project-subtitle">Ứng dụng web quản lý thư viện sử dụng ASP.NET Core và SQL Server</p>
+                <div class="project-meta">
+                    <span>👤 Trần Văn Vương</span>
+                    <span>📅 2023</span>
+                    <span>⏱️ 3 tháng phát triển</span>
+                    <span>🔧 Full-stack</span>
+                </div>
+            </header>
+            
+            <div class="project-content">
+                <h2>📋 Tổng quan dự án</h2>
+                <p>Hệ thống quản lý thư viện là một ứng dụng web toàn diện được phát triển để quản lý các hoạt động của thư viện trường học. Dự án này giúp tôi nắm vững các công nghệ web hiện đại và áp dụng kiến thức lý thuyết vào thực tế.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Mục tiêu dự án:</strong>
+                    <ul>
+                        <li>Tạo hệ thống quản lý sách và tài liệu</li>
+                        <li>Quản lý thông tin thành viên thư viện</li>
+                        <li>Xử lý quy trình mượn và trả sách</li>
+                        <li>Báo cáo thống kê và phân tích</li>
+                    </ul>
+                </div>
+                
+                <h2>🛠️ Công nghệ sử dụng</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">ASP.NET Core</span>
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">Entity Framework</span>
+                    <span class="tech-tag">Bootstrap</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">Git</span>
+                </div>
+                
+                <h2>✨ Tính năng chính</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📚 Quản lý sách</h4>
+                        <ul>
+                            <li>Thêm, sửa, xóa thông tin sách</li>
+                            <li>Phân loại theo danh mục</li>
+                            <li>Tìm kiếm và lọc sách</li>
+                            <li>Quản lý trạng thái sách</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>👥 Quản lý thành viên</h4>
+                        <ul>
+                            <li>Đăng ký thành viên mới</li>
+                            <li>Cập nhật thông tin cá nhân</li>
+                            <li>Lịch sử mượn sách</li>
+                            <li>Quản lý tài khoản</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📖 Quy trình mượn trả</h4>
+                        <ul>
+                            <li>Đăng ký mượn sách</li>
+                            <li>Gia hạn thời gian mượn</li>
+                            <li>Xử lý trả sách</li>
+                            <li>Thông báo quá hạn</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📊 Báo cáo thống kê</h4>
+                        <ul>
+                            <li>Thống kê sách được mượn nhiều</li>
+                            <li>Báo cáo thành viên tích cực</li>
+                            <li>Phân tích xu hướng mượn sách</li>
+                            <li>Xuất báo cáo Excel</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>🏗️ Kiến trúc hệ thống</h2>
+                <p>Dự án được xây dựng theo mô hình MVC (Model-View-Controller) với các lớp sau:</p>
+                
+                <div class="highlight-box">
+                    <strong>📁 Cấu trúc dự án:</strong>
+                    <ul>
+                        <li><strong>Models:</strong> Định nghĩa các entity và DTO</li>
+                        <li><strong>Controllers:</strong> Xử lý logic nghiệp vụ</li>
+                        <li><strong>Views:</strong> Giao diện người dùng</li>
+                        <li><strong>Services:</strong> Các dịch vụ nghiệp vụ</li>
+                        <li><strong>Data Access:</strong> Repository pattern</li>
+                    </ul>
+                </div>
+                
+                <h2>🗄️ Thiết kế cơ sở dữ liệu</h2>
+                <p>Hệ thống sử dụng SQL Server với các bảng chính:</p>
+                <ul>
+                    <li><strong>Books:</strong> Thông tin sách</li>
+                    <li><strong>Members:</strong> Thông tin thành viên</li>
+                    <li><strong>Borrowings:</strong> Lịch sử mượn sách</li>
+                    <li><strong>Categories:</strong> Danh mục sách</li>
+                    <li><strong>Users:</strong> Tài khoản hệ thống</li>
+                </ul>
+                
+                <h2>💡 Thách thức và giải pháp</h2>
+                <div class="challenge-solution">
+                    <div class="challenge">
+                        <h4>⚠️ Thách thức</h4>
+                        <ul>
+                            <li>Thiết kế database phức tạp</li>
+                            <li>Xử lý logic nghiệp vụ</li>
+                            <li>Optimize hiệu suất truy vấn</li>
+                            <li>Bảo mật thông tin</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution">
+                        <h4>✅ Giải pháp</h4>
+                        <ul>
+                            <li>Sử dụng Entity Framework</li>
+                            <li>Áp dụng Repository pattern</li>
+                            <li>Index database và caching</li>
+                            <li>Authentication và authorization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>📈 Kết quả đạt được</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🎓 Kỹ năng kỹ thuật</h4>
+                        <ul>
+                            <li>Thành thạo ASP.NET Core</li>
+                            <li>Làm việc với Entity Framework</li>
+                            <li>Thiết kế database</li>
+                            <li>Frontend với Bootstrap</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🚀 Kỹ năng mềm</h4>
+                        <ul>
+                            <li>Lập kế hoạch dự án</li>
+                            <li>Quản lý thời gian</li>
+                            <li>Debug và troubleshooting</li>
+                            <li>Documentation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2>🔧 Cài đặt và chạy dự án</h2>
+                <div class="highlight-box">
+                    <strong>📋 Hướng dẫn cài đặt:</strong>
+                    <ol>
+                        <li>Clone repository từ GitHub</li>
+                        <li>Cài đặt .NET Core SDK</li>
+                        <li>Cấu hình connection string</li>
+                        <li>Chạy migration để tạo database</li>
+                        <li>Khởi động ứng dụng</li>
+                    </ol>
+                </div>
+                
+                <h2>📚 Bài học kinh nghiệm</h2>
+                <p>Dự án này đã giúp tôi học được nhiều kiến thức quý báu:</p>
+                <ul>
+                    <li><strong>Full-stack development:</strong> Hiểu rõ cách kết nối frontend và backend</li>
+                    <li><strong>Database design:</strong> Thiết kế database hiệu quả và tối ưu</li>
+                    <li><strong>Code organization:</strong> Tổ chức code theo best practices</li>
+                    <li><strong>Testing:</strong> Viết unit test và integration test</li>
+                    <li><strong>Deployment:</strong> Triển khai ứng dụng lên server</li>
+                </ul>
+                
+                <h2>🔮 Hướng phát triển</h2>
+                <p>Trong tương lai, tôi dự định nâng cấp dự án với:</p>
+                <ul>
+                    <li>API RESTful cho mobile app</li>
+                    <li>Real-time notifications</li>
+                    <li>Advanced search với Elasticsearch</li>
+                    <li>Microservices architecture</li>
+                    <li>Docker containerization</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Kết luận:</strong>
+                    <p>Dự án Hệ thống quản lý thư viện đã giúp tôi nắm vững các công nghệ web hiện đại và áp dụng kiến thức lý thuyết vào thực tế. Đây là bước đệm quan trọng cho việc phát triển các dự án phức tạp hơn trong tương lai.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
